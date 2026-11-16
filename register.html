@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101E35">
+    <title>Student Registration | PUB250</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="auth-page">
+
+    <main class="auth-container">
+
+        <a href="index.html" class="auth-brand">
+            <span class="auth-brand-icon">P</span>
+            <span>
+                <strong>PUB250</strong>
+                <small>PUBLIC ADMINISTRATION</small>
+            </span>
+        </a>
+
+        <section class="auth-card">
+
+            <div class="auth-heading">
+                <span class="auth-eyebrow">STUDENT REGISTRATION</span>
+                <h1>Request access</h1>
+                <p>Complete your details to request access to the PUB250 student portal.</p>
+            </div>
+
+            <form id="registrationForm">
+
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="full_name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        minlength="3"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="matricNo">Matriculation Number</label>
+                    <input
+                        type="text"
+                        id="matricNo"
+                        name="matric_no"
+                        placeholder="Enter your matric number"
+                        autocomplete="off"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Gmail Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@gmail.com"
+                        autocomplete="email"
+                        required
+                    >
+                    <small class="field-hint">
+                        Use an active Gmail address for account contact purposes.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsappNumber">WhatsApp Number</label>
+                    <input
+                        type="tel"
+                        id="whatsappNumber"
+                        name="whatsapp_number"
+                        placeholder="+2348012345678"
+                        autocomplete="tel"
+                        required
+                    >
+                    <small class="field-hint">
+                        Include your country code. Example: +2348012345678
+                    </small>
+                </div>
+
+                <div id="registrationMessage"
+                     class="auth-message"
+                     role="alert">
+                </div>
+
+                <button
+                    type="submit"
+                    id="registerButton"
+                    class="auth-submit"
+                >
+                    <span id="registerButtonText">Submit Registration</span>
+                </button>
+
+            </form>
+
+            <div class="auth-divider">
+                <span></span>
+                <small>ALREADY REGISTERED?</small>
+                <span></span>
+            </div>
+
+            <a href="login.html" class="auth-register-link">
+                Return to Student Login
+            </a>
+
+        </section>
+
+        <footer class="creator-footer auth-creator-footer">
+            <div class="creator-footer-brand">
+                <span class="creator-footer-line"></span>
+                <span>PUB250</span>
+                <span class="creator-footer-line"></span>
+            </div>
+
+            <p class="creator-footer-label">
+                DESIGNED &amp; DEVELOPED BY
+            </p>
+
+            <p class="creator-footer-name">
+                Celebrity Celeb <span>✝️</span>
+            </p>
+
+            <p class="creator-footer-copyright">
+                © 2026 PUB250. All rights reserved.
+            </p>
+        </footer>
+
+    </main>
+
+    <script type="module">
+        import { supabase } from "./js/config.js";
+
+        const form = document.getElementById("registrationForm");
+        const message = document.getElementById("registrationMessage");
+        const button = document.getElementById("registerButton");
+        const buttonText = document.getElementById("registerButtonText");
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            message.textContent = "";
+            message.className = "auth-message";
+
+            button.disabled = true;
+            buttonText.textContent = "Submitting...";
+
+            const registrationDetails = {
+                full_name: document.getElementById("fullName").value.trim(),
+                matric_no: document.getElementById("matricNo").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                whatsapp_number: document.getElementById("whatsappNumber").value.trim()
+            };
+
+            try {
+                const { data, error } = await supabase.functions.invoke(
+                    "register-student",
+                    {
+                        body: registrationDetails
+                    }
+                );
+
+                if (error) {
+                    throw new Error(
+                        data?.error || error.message || "Registration failed."
+                    );
+                }
+
+                if (!data?.success) {
+                    throw new Error(
+                        data?.error || "Registration could not be completed."
+                    );
+                }
+
+                form.reset();
+
+                message.textContent =
+                    "Registration submitted successfully! Your account is awaiting administrator approval. You will receive your access code through WhatsApp after approval.";
+
+                message.className = "auth-message success";
+
+                buttonText.textContent = "Registration Submitted";
+
+            } catch (error) {
+                message.textContent = error.message;
+                message.className = "auth-message error";
+
+                button.disabled = false;
+                buttonText.textContent = "Submit Registration";
+            }
+        });
+    </script>
+
+</body>
+</html>
