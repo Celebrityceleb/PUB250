@@ -1587,3 +1587,53 @@ input {
     }
 
 }
+/* =========================================
+   ADMIN LOGIN MOBILE LAYOUT FIX
+========================================= */
+
+.admin-login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 30px 15px 0;
+    box-sizing: border-box;
+}
+
+.admin-login-page .auth-container {
+    width: 100%;
+    max-width: 440px;
+    flex: 0 0 auto;
+    margin: auto auto 0;
+    box-sizing: border-box;
+}
+
+.admin-login-page .auth-card {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-login-page .auth-creator-footer {
+    width: 100%;
+    max-width: 440px;
+    flex-shrink: 0;
+    margin: 25px auto 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .admin-login-page {
+        padding: 22px 14px 20px;
+    }
+
+    .admin-login-page .auth-container {
+        margin: 0 auto;
+    }
+
+    .admin-login-page .auth-creator-footer {
+        margin-top: 25px;
+    }
+   }
