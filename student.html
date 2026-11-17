@@ -320,6 +320,9 @@
             requireStudent,
             logout
         } from "./js/auth.js";
+        import {
+    loadStudentCourses
+} from "./js/student-courses.js";
 
 
         const sidebar =
@@ -427,7 +430,7 @@
 
 
         // Render the selected dashboard section.
-        function openSection(section) {
+        async function openSection(section) {
 
             document.querySelectorAll(".admin-nav-item")
                 .forEach(button => {
