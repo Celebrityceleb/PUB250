@@ -67,6 +67,118 @@ export async function loadRegistrations(container) {
 }
 
 
+// Approve a student through the secure Edge Function.
+async function approveStudent(studentId, container) {
+
+    const student = registrations.find(item => item.id === studentId);
+
+    if (!student) {
+        alert("Student record not found. Refresh the page.");
+        return;
+    }
+
+    const confirmed = confirm(
+        `Approve ${student.full_name} (${student.matric_no})?\n\n` +
+        "A unique student access code will be generated."
+    );
+
+    if (!confirmed) return;
+
+    const button = container.querySelector(
+        `[data-approve-id="${studentId}"]`
+    );
+
+    const resultBox = container.querySelector(
+        `[data-approval-result="${studentId}"]`
+    );
+
+    if (button) {
+        button.disabled = true;
+        button.textContent = "Approving...";
+    }
+
+    if (resultBox) {
+        resultBox.innerHTML = "";
+    }
+
+    try {
+
+        const { data, error } = await supabase.functions.invoke(
+            "approve-student",
+            {
+                body: {
+                    student_id: studentId
+                }
+            }
+        );
+
+        if (error) {
+            let errorMessage = error.message;
+
+            if (error.context) {
+                try {
+                    const response = await error.context.json();
+                    errorMessage = response.error || errorMessage;
+                } catch {
+                    // Keep the original error message.
+                }
+            }
+
+            throw new Error(errorMessage);
+        }
+
+        if (!data) {
+            throw new Error("The approval function returned no response.");
+        }
+
+        // Show the exact response for verification.
+        if (resultBox) {
+            resultBox.innerHTML = `
+                <div class="admin-panel" style="margin-top:15px;">
+                    <h4>Approval function response</h4>
+                    <p>Student approval request completed.</p>
+                    <pre style="
+                        white-space:pre-wrap;
+                        overflow-wrap:anywhere;
+                        font-size:12px;
+                        background:#F3F5F8;
+                        padding:12px;
+                        border-radius:8px;
+                    ">${escapeHTML(JSON.stringify(data, null, 2))}</pre>
+                    <p>
+                        Keep this access code private. Do not share it publicly.
+                    </p>
+                </div>
+            `;
+        }
+
+        if (button) {
+            button.textContent = "Approved";
+            button.disabled = true;
+        }
+
+        student.approval_status = "approved";
+
+    } catch (error) {
+
+        console.error("Student approval failed:", error);
+
+        if (resultBox) {
+            resultBox.innerHTML = `
+                <p style="color:#B42318; margin-top:12px;">
+                    Approval failed: ${escapeHTML(error.message)}
+                </p>
+            `;
+        }
+
+        if (button) {
+            button.disabled = false;
+            button.textContent = "Approve Student";
+        }
+    }
+}
+
+
 // Display the registration management interface.
 function renderRegistrationPage(container) {
 
@@ -221,6 +333,23 @@ function renderRegistrationPage(container) {
 
                             </div>
 
+                            ${
+                                student.approval_status === "pending"
+                                ? `
+                                    <div style="margin-top:15px;">
+                                        <button
+                                            class="admin-action-button"
+                                            data-approve-id="${escapeHTML(student.id)}"
+                                        >
+                                            Approve Student
+                                        </button>
+                                    </div>
+                                `
+                                : ""
+                            }
+
+                            <div data-approval-result="${escapeHTML(student.id)}"></div>
+
                         </article>
                     `).join("")
                 }
@@ -237,13 +366,18 @@ function renderRegistrationPage(container) {
     // Switch between registration categories.
     container.querySelectorAll("[data-filter]")
         .forEach(button => {
-
             button.addEventListener("click", () => {
-
                 activeFilter = button.dataset.filter;
                 renderRegistrationPage(container);
-
             });
-
         });
-}
+
+    // Handle student approval.
+    container.querySelectorAll("[data-approve-id]")
+        .forEach(button => {
+            button.addEventListener("click", () => {
+                approveStudent(button.dataset.approveId, container);
+            });
+        });
+            }
+                        
