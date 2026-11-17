@@ -113,6 +113,7 @@ async function approveStudent(studentId, container) {
         );
 
         if (error) {
+
             let errorMessage = error.message;
 
             if (error.context) {
@@ -120,44 +121,151 @@ async function approveStudent(studentId, container) {
                     const response = await error.context.json();
                     errorMessage = response.error || errorMessage;
                 } catch {
-                    // Keep the original error message.
+                    // Retain the original error.
                 }
             }
 
             throw new Error(errorMessage);
         }
 
-        if (!data) {
-            throw new Error("The approval function returned no response.");
+        if (!data || !data.access_code || !data.student) {
+            throw new Error(
+                "The approval function returned an incomplete response."
+            );
         }
 
-        // Show the exact response for verification.
+        const approvedStudent = data.student;
+
+        const studentName =
+            approvedStudent.full_name || student.full_name;
+
+        const matricNo =
+            approvedStudent.matric_no || student.matric_no;
+
+        const whatsappNumber =
+            approvedStudent.whatsapp_number ||
+            student.whatsapp_number ||
+            student.phone;
+
+        // Prepare WhatsApp delivery.
+        let whatsappLink = "";
+
+        if (whatsappNumber) {
+
+            let digits = String(whatsappNumber).replace(/\D/g, "");
+
+            // Convert Nigerian local numbers to international format.
+            if (digits.startsWith("0")) {
+                digits = "234" + digits.slice(1);
+            }
+
+            if (digits.length >= 10) {
+
+                const whatsappMessage =
+                    `Hello ${studentName},\n\n` +
+                    `Your PUB250 student account has been approved.\n\n` +
+                    `Matric Number: ${matricNo}\n` +
+                    `Access Code: ${data.access_code}\n\n` +
+                    `You can now log in to the PUB250 student portal:\n` +
+                    `https://celebrityceleb.github.io/PUB250/login.html\n\n` +
+                    `Keep your access code private.`;
+
+                const whatsappURL =
+                    "https://wa.me/" + digits +
+                    "?text=" + encodeURIComponent(whatsappMessage);
+
+                whatsappLink = `
+                    <a
+                        href="${escapeHTML(whatsappURL)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="admin-action-button"
+                        style="
+                            display:inline-block;
+                            text-decoration:none;
+                            margin-top:12px;
+                        "
+                    >
+                        Send via WhatsApp
+                    </a>
+                `;
+            }
+        }
+
+        // Display the approval result.
         if (resultBox) {
+
             resultBox.innerHTML = `
                 <div class="admin-panel" style="margin-top:15px;">
-                    <h4>Approval function response</h4>
-                    <p>Student approval request completed.</p>
-                    <pre style="
-                        white-space:pre-wrap;
-                        overflow-wrap:anywhere;
-                        font-size:12px;
-                        background:#F3F5F8;
-                        padding:12px;
-                        border-radius:8px;
-                    ">${escapeHTML(JSON.stringify(data, null, 2))}</pre>
+
+                    <h4>Student Approved Successfully</h4>
+
                     <p>
-                        Keep this access code private. Do not share it publicly.
+                        ${escapeHTML(
+                            data.message || "The student account has been approved."
+                        )}
                     </p>
+
+                    <div style="
+                        background:#F3F5F8;
+                        padding:15px;
+                        border-radius:10px;
+                        margin-top:12px;
+                    ">
+
+                        <p>
+                            <strong>Student:</strong>
+                            ${escapeHTML(studentName)}
+                        </p>
+
+                        <p>
+                            <strong>Matric Number:</strong>
+                            ${escapeHTML(matricNo)}
+                        </p>
+
+                        <p><strong>Access Code:</strong></p>
+
+                        <strong style="
+                            font-size:20px;
+                            letter-spacing:2px;
+                            color:#101E35;
+                            overflow-wrap:anywhere;
+                        ">
+                            ${escapeHTML(data.access_code)}
+                        </strong>
+
+                    </div>
+
+                    ${
+                        whatsappLink
+                        ? whatsappLink
+                        : `
+                            <p style="color:#B42318;margin-top:12px;">
+                                No valid WhatsApp number was found.
+                                The access code must be delivered manually.
+                            </p>
+                        `
+                    }
+
+                    <p style="
+                        font-size:12px;
+                        color:#8492A6;
+                        margin-top:12px;
+                    ">
+                        WhatsApp will open with a prefilled message.
+                        You must press Send inside WhatsApp.
+                    </p>
+
                 </div>
             `;
         }
+
+        student.approval_status = "approved";
 
         if (button) {
             button.textContent = "Approved";
             button.disabled = true;
         }
-
-        student.approval_status = "approved";
 
     } catch (error) {
 
@@ -165,7 +273,7 @@ async function approveStudent(studentId, container) {
 
         if (resultBox) {
             resultBox.innerHTML = `
-                <p style="color:#B42318; margin-top:12px;">
+                <p style="color:#B42318;margin-top:12px;">
                     Approval failed: ${escapeHTML(error.message)}
                 </p>
             `;
@@ -321,13 +429,20 @@ function renderRegistrationPage(container) {
 
                                 <p>
                                     <span>WhatsApp</span>
-                                    ${escapeHTML(student.whatsapp_number || student.phone || "Not provided")}
+                                    ${escapeHTML(
+                                        student.whatsapp_number ||
+                                        student.phone ||
+                                        "Not provided"
+                                    )}
                                 </p>
 
                                 <p>
                                     <span>Date Registered</span>
                                     ${student.created_at
-                                        ? escapeHTML(new Date(student.created_at).toLocaleDateString())
+                                        ? escapeHTML(
+                                            new Date(student.created_at)
+                                                .toLocaleDateString()
+                                        )
                                         : "Unavailable"}
                                 </p>
 
@@ -366,18 +481,22 @@ function renderRegistrationPage(container) {
     // Switch between registration categories.
     container.querySelectorAll("[data-filter]")
         .forEach(button => {
+
             button.addEventListener("click", () => {
                 activeFilter = button.dataset.filter;
                 renderRegistrationPage(container);
             });
+
         });
 
     // Handle student approval.
     container.querySelectorAll("[data-approve-id]")
         .forEach(button => {
+
             button.addEventListener("click", () => {
                 approveStudent(button.dataset.approveId, container);
             });
+
         });
-            }
-                        
+                    }
+        
