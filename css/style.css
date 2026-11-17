@@ -1804,3 +1804,74 @@ input {
     }
 
    }
+
+/* =================================
+   PUB250 TOPIC MANAGER
+================================= */
+
+.topic-list {
+    margin-top: 20px;
+}
+
+.topic-management-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid #EAECF0;
+}
+
+.topic-management-card:last-child {
+    border-bottom: none;
+}
+
+.topic-management-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+    min-width: 0;
+}
+
+.topic-management-info h3 {
+    margin: 0;
+    color: #101E35;
+    font-size: 16px;
+    overflow-wrap: anywhere;
+}
+
+.topic-number {
+    color: #B18D32;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+.topic-management-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.topic-management-actions button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+
+    .topic-management-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .topic-management-actions {
+        width: 100%;
+    }
+
+    .topic-management-actions button {
+        flex: 1;
+    }
+
+}
