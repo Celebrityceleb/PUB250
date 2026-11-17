@@ -2348,3 +2348,435 @@ input {
         overflow-x: auto;
     }
 }
+/* =========================================
+   STUDENT COURSE LIBRARY
+   PART 1 — MAIN STYLING
+========================================= */
+
+.student-course-filter-panel {
+    margin-bottom: 28px;
+}
+
+.student-course-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.student-course-filters label {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    color: #344054;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.student-course-filters select {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 13px;
+    border: 1px solid #DCE2EA;
+    border-radius: 9px;
+    background: #FFFFFF;
+    color: #101E35;
+    font: inherit;
+    outline: none;
+}
+
+.student-course-filters select:focus {
+    border-color: #D7B65D;
+    box-shadow: 0 0 0 3px rgba(215, 182, 93, 0.14);
+}
+
+.student-course-library-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin: 30px 0 18px;
+}
+
+.student-course-library-heading h3 {
+    margin: 5px 0 0;
+    color: #101E35;
+    font-size: 20px;
+}
+
+.student-course-library-heading > span {
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #F5F1E5;
+    color: #80651F;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.student-course-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.student-course-card,
+.student-chapter-card,
+.student-topic-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 21px;
+    border: 1px solid #E5E9EF;
+    border-radius: 13px;
+    background: #FFFFFF;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.student-course-card:hover,
+.student-chapter-card:hover,
+.student-topic-card:hover {
+    border-color: #D7B65D;
+    box-shadow: 0 7px 20px rgba(16, 30, 53, 0.07);
+    transform: translateY(-2px);
+}
+
+.student-course-code {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: #101E35;
+    color: #E6CA7A;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.student-course-card strong,
+.student-chapter-card strong,
+.student-topic-card strong {
+    color: #101E35;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.student-course-card > span:not(.student-course-code),
+.student-chapter-card > span,
+.student-topic-card > span {
+    color: #778397;
+    font-size: 12px;
+}
+
+.student-course-card .student-course-open {
+    margin-top: 5px;
+    color: #9A792B;
+    font-weight: 700;
+}
+
+.student-chapter-list,
+.student-topic-list {
+    display: grid;
+    gap: 13px;
+}
+
+.student-chapter-card,
+.student-topic-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.student-chapter-card strong,
+.student-topic-card strong {
+    flex: 1;
+    margin: 0 15px;
+}
+
+.student-chapter-card > span:first-child,
+.student-topic-card > span:first-child {
+    color: #9A792B;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.student-chapter-card > span:last-child,
+.student-topic-card > span:last-child {
+    color: #101E35;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* =========================================
+   PUBLISHED LECTURE NOTES
+========================================= */
+
+.student-lecture-notes {
+    padding: 30px;
+}
+
+.student-notes-heading {
+    padding-bottom: 22px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #E8EBF0;
+}
+
+.student-notes-heading > span {
+    color: #9A792B;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.student-notes-heading h3 {
+    margin: 10px 0 0;
+    color: #101E35;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.student-notes-content {
+    color: #344054;
+    font-size: 15px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+.student-notes-content h1,
+.student-notes-content h2,
+.student-notes-content h3,
+.student-notes-content h4 {
+    margin: 28px 0 12px;
+    color: #101E35;
+    line-height: 1.4;
+}
+
+.student-notes-content h1 {
+    font-size: 25px;
+}
+
+.student-notes-content h2 {
+    font-size: 22px;
+}
+
+.student-notes-content h3 {
+    font-size: 19px;
+}
+
+.student-notes-content h4 {
+    font-size: 16px;
+}
+
+.student-notes-content p {
+    margin: 0 0 17px;
+}
+
+.student-notes-content ul,
+.student-notes-content ol {
+    padding-left: 25px;
+    margin: 15px 0;
+}
+
+.student-notes-content li {
+    margin-bottom: 8px;
+}
+
+.student-notes-content blockquote {
+    margin: 22px 0;
+    padding: 15px 20px;
+    border-left: 4px solid #D7B65D;
+    border-radius: 0 8px 8px 0;
+    background: #F7F8FA;
+    color: #526075;
+}
+
+.student-notes-content a {
+    color: #9A792B;
+    text-decoration: underline;
+}
+
+.student-notes-content hr {
+    margin: 25px 0;
+    border: 0;
+    border-top: 1px solid #E5E9EF;
+}
+
+.student-notes-content img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.student-notes-content table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    overflow-wrap: anywhere;
+}
+
+.student-notes-content th,
+.student-notes-content td {
+    padding: 11px;
+    border: 1px solid #DCE2EA;
+    text-align: left;
+}
+
+.student-notes-content th {
+    background: #101E35;
+    color: #FFFFFF;
+}
+
+.student-notes-content tr:nth-child(even) {
+    background: #F7F8FA;
+   }
+   
+/* =========================================
+   STUDENT COURSE LIBRARY
+   PART 2 — RESPONSIVE & FINISHING
+========================================= */
+
+/* Back navigation buttons */
+.student-course-library + .admin-action-button,
+.admin-content .admin-action-button {
+    transition: background 0.2s, transform 0.2s;
+}
+
+.admin-content .admin-action-button:hover {
+    background: #D7B65D;
+    color: #101E35;
+}
+
+/* Course library spacing */
+.student-course-library-heading h3 {
+    line-height: 1.4;
+}
+
+.student-course-grid,
+.student-chapter-list,
+.student-topic-list {
+    width: 100%;
+}
+
+/* Loading and empty states */
+.admin-content .admin-placeholder {
+    line-height: 1.8;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+
+    .student-course-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .student-course-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .student-lecture-notes {
+        padding: 24px;
+    }
+
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .student-course-filters {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .student-course-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .student-course-card {
+        padding: 19px;
+    }
+
+    .student-course-library-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .student-course-library-heading h3 {
+        font-size: 18px;
+    }
+
+    .student-chapter-card,
+    .student-topic-card {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+        padding: 17px;
+    }
+
+    .student-chapter-card strong,
+    .student-topic-card strong {
+        margin: 0;
+        font-size: 15px;
+    }
+
+    .student-chapter-card > span,
+    .student-topic-card > span {
+        white-space: normal;
+    }
+
+    .student-lecture-notes {
+        padding: 18px;
+    }
+
+    .student-notes-heading h3 {
+        font-size: 18px;
+    }
+
+    .student-notes-content {
+        font-size: 14px;
+        line-height: 1.85;
+    }
+
+    .student-notes-content table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .student-notes-content h1 {
+        font-size: 22px;
+    }
+
+    .student-notes-content h2 {
+        font-size: 20px;
+    }
+
+    .student-notes-content h3 {
+        font-size: 17px;
+    }
+
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+
+    .student-course-card,
+    .student-chapter-card,
+    .student-topic-card {
+        padding: 15px;
+    }
+
+    .student-course-card strong {
+        font-size: 15px;
+    }
+
+    .student-notes-content {
+        font-size: 13px;
+    }
+
+   }
