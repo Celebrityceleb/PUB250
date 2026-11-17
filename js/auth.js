@@ -78,7 +78,7 @@ export async function studentLogin(matricNo, accessCode) {
     try {
 
         const { data, error } = await supabase.functions.invoke(
-            "student-login",
+            "student-login-",
             {
                 body: {
                     matric_no: matricNo.trim(),
