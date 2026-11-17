@@ -453,6 +453,14 @@
 
                 return;
             }
+            if (section === "courses") {
+
+    pageTitle.textContent = "Courses";
+
+    await loadStudentCourses(content);
+
+    return;
+            }
 
 
             if (section === "profile") {
