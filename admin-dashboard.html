@@ -188,6 +188,9 @@
     import {
         loadRegistrations
     } from "./js/admin.js";
+    import {
+    loadCourses
+} from "./js/courses.js";
 
 
     const adminName = document.getElementById("adminName");
@@ -282,11 +285,17 @@
 
                 else if (section === "registrations") {
 
-                    await loadRegistrations(adminContent);
+    await loadRegistrations(adminContent);
 
-                }
+}
 
-                else {
+else if (section === "courses") {
+
+    await loadCourses(adminContent);
+
+}
+
+else {
 
                     adminContent.innerHTML = `
                         <div class="admin-panel">
