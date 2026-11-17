@@ -2113,40 +2113,55 @@ async function saveTopicNotes(status) {
         button.disabled = true;
     });
 
-    const { error } = await supabase
-        .from("course_topics")
-        .update({
-            content: {
-                type: "html",
-                html: cleanHTML
-            },
-            publication_status: status,
-            updated_at: new Date().toISOString()
-        })
-        .eq("id", editingTopicId)
-        .eq("course_id", activeCourse.id)
-        .eq("chapter_id", activeChapter.id);
+    try {
+        const { data, error } = await supabase
+            .from("course_topics")
+            .update({
+                content: {
+                    type: "html",
+                    html: cleanHTML
+                },
+                publication_status: status,
+                updated_at: new Date().toISOString()
+            })
+            .eq("id", editingTopicId)
+            .eq("course_id", activeCourse.id)
+            .eq("chapter_id", activeChapter.id)
+            .select("id, content, publication_status")
+            .maybeSingle();
 
-    buttons.forEach(button => {
-        button.disabled = false;
-    });
+        if (error) {
+            throw error;
+        }
 
-    if (error) {
+        if (!data) {
+            throw new Error(
+                "No topic was updated. The topic ID or chapter information did not match, or the database denied the update."
+            );
+        }
+
+        notify(
+            status === "published"
+                ? "Notes updated and published successfully."
+                : "Notes updated and saved as a draft."
+        );
+
+        await openTopicManager(
+            activeChapter.id,
+            dashboardContainer
+        );
+
+    } catch (error) {
+        console.error("Notes update failed:", error);
+
         notify(
             "Could not save notes: " +
             getErrorMessage(error)
         );
-        return;
+
+    } finally {
+        buttons.forEach(button => {
+            button.disabled = false;
+        });
     }
-
-    notify(
-        status === "published"
-            ? "Notes saved and published successfully."
-            : "Notes saved as a draft."
-    );
-
-    await openTopicManager(
-        activeChapter.id,
-        dashboardContainer
-    );
-}
+                }
