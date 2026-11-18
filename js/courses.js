@@ -85,7 +85,120 @@ function getCourseDetails(course) {
     const level = levels.find(
         item => item.id === course.academic_level_id
     );
+/* =========================================
+   STUDENT PDF MATERIALS HELPER
+========================================= */
 
+async function loadPDFMaterials(courseId, topicId = null) {
+
+    let query = supabase
+        .from("course_materials")
+        .select("*")
+        .eq("course_id", courseId)
+        .order("created_at", {
+            ascending: false
+        });
+
+
+    if (topicId) {
+
+        query = query.eq("topic_id", topicId);
+
+    } else {
+
+        query = query.is("topic_id", null);
+
+    }
+
+
+    const { data: materials, error } = await query;
+
+
+    if (error) throw error;
+
+
+    if (!materials || materials.length === 0) {
+
+        return `
+            <div class="student-material-empty">
+                <p>No PDF materials available here yet.</p>
+            </div>
+        `;
+
+    }
+
+
+    const materialCards = await Promise.all(
+        materials.map(async material => {
+
+            const { data, error: urlError } = await supabase
+                .storage
+                .from("course-materials")
+                .createSignedUrl(material.storage_path, 3600);
+
+
+            if (urlError) {
+
+                console.error(
+                    "PDF signed URL error:",
+                    urlError
+                );
+
+                return `
+                    <div class="student-material-card">
+                        <strong>
+                            ${escapeHTML(material.material_title)}
+                        </strong>
+
+                        <p>Unable to open this PDF right now.</p>
+                    </div>
+                `;
+
+            }
+
+
+            return `
+                <div class="student-material-card">
+
+                    <div class="student-material-info">
+
+                        <span class="student-material-file-label">
+                            PDF DOCUMENT
+                        </span>
+
+                        <strong>
+                            ${escapeHTML(material.material_title)}
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(material.file_name)}
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="${escapeHTML(data.signedUrl)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="student-material-open"
+                    >
+                        Open PDF →
+                    </a>
+
+                </div>
+            `;
+
+        })
+    );
+
+
+    return `
+        <div class="student-material-list">
+            ${materialCards.join("")}
+        </div>
+    `;
+
+               }
     const semester = semesters.find(
         item => item.id === course.semester_id
     );
