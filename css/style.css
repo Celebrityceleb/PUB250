@@ -2885,3 +2885,72 @@ input {
     }
 
 }
+/* =========================================
+   PUB250 STUDENT PDF CARD OVERRIDE
+========================================= */
+
+.admin-panel.student-course-materials-panel
+.student-material-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+}
+
+.admin-panel.student-course-materials-panel
+.student-material-card {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    padding: 18px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e7ef !important;
+    border-radius: 14px !important;
+    box-shadow: 0 3px 12px rgba(16, 30, 53, 0.04) !important;
+}
+
+.admin-panel.student-course-materials-panel
+.student-material-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 7px !important;
+}
+
+.admin-panel.student-course-materials-panel
+.student-material-info strong {
+    color: #101e35 !important;
+    font-size: 15px !important;
+}
+
+.admin-panel.student-course-materials-panel
+.student-material-open {
+    display: inline-flex !important;
+    padding: 12px 18px !important;
+    background: #101e35 !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+}
+
+.admin-panel.student-course-materials-panel
+.student-material-open:hover {
+    background: #b38a36 !important;
+}
+
+@media (max-width: 600px) {
+
+    .admin-panel.student-course-materials-panel
+    .student-material-card {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    .admin-panel.student-course-materials-panel
+    .student-material-open {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        justify-content: center !important;
+    }
+
+   }
