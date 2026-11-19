@@ -3259,4 +3259,414 @@ input {
     }
 
    }
-       
+
+/* =========================================
+   COURSE PDF MATERIALS MANAGER
+========================================= */
+
+.course-pdf-manager {
+    width: 100%;
+    color: #17243a;
+}
+
+.course-pdf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px;
+    margin-bottom: 24px;
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 16px;
+}
+
+.course-pdf-eyebrow {
+    display: inline-block;
+    color: #a78335;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+    margin-bottom: 9px;
+}
+
+.course-pdf-header h2 {
+    margin: 0 0 10px;
+    color: #101e35;
+    font-size: 25px;
+}
+
+.course-pdf-course-name {
+    margin: 0 0 7px;
+    font-weight: 700;
+    color: #34445d;
+}
+
+.course-pdf-course-details {
+    margin: 0 0 12px;
+    color: #7b8798;
+    font-size: 13px;
+}
+
+.course-pdf-location {
+    display: inline-block;
+    padding: 7px 11px;
+    background: #f4f6f9;
+    border-radius: 7px;
+    color: #34445d;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.course-pdf-back {
+    flex-shrink: 0;
+    padding: 10px 15px;
+    background: #f4f6f9;
+    color: #101e35;
+    border: 1px solid #e1e6ed;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* UPLOAD CARD */
+
+.course-pdf-upload-card {
+    padding: 25px;
+    margin-bottom: 30px;
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(16, 30, 53, 0.04);
+}
+
+.course-pdf-upload-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.course-pdf-upload-heading h3 {
+    margin: 0 0 8px;
+    color: #101e35;
+    font-size: 19px;
+}
+
+.course-pdf-upload-heading p {
+    margin: 0;
+    color: #7b8798;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.course-pdf-upload-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #f8f3e8;
+    color: #a78335;
+    border-radius: 12px;
+    font-size: 27px;
+}
+
+.course-pdf-form-group {
+    margin-bottom: 20px;
+}
+
+.course-pdf-form-group label {
+    display: block;
+    margin-bottom: 9px;
+    color: #26364d;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.course-pdf-form-group input[type="text"],
+.course-pdf-form-group input[type="file"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    background: #fbfcfe;
+    border: 1px solid #dce3ec;
+    border-radius: 9px;
+    color: #26364d;
+    font-size: 13px;
+}
+
+.course-pdf-form-group input:focus {
+    outline: none;
+    border-color: #b18b3e;
+    box-shadow: 0 0 0 3px rgba(177, 139, 62, 0.10);
+}
+
+.course-pdf-file-hint {
+    margin: 8px 0;
+    color: #8994a4;
+    font-size: 11px;
+}
+
+.course-pdf-file-details {
+    padding: 11px 13px;
+    background: #f4f6f9;
+    border-radius: 8px;
+    color: #536278;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.course-pdf-status {
+    display: none;
+    margin: 12px 0;
+    padding: 11px 13px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.course-pdf-status.error,
+.course-pdf-status.loading {
+    display: block;
+}
+
+.course-pdf-status.error {
+    background: #fff0f0;
+    color: #b42318;
+    border: 1px solid #f5cccc;
+}
+
+.course-pdf-status.loading {
+    background: #f4f6f9;
+    color: #34445d;
+    border: 1px solid #e1e6ed;
+}
+
+.course-pdf-upload-button {
+    width: 100%;
+    padding: 14px;
+    background: #101e35;
+    color: #ffffff;
+    border: none;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.course-pdf-upload-button:hover {
+    background: #1d3456;
+}
+
+.course-pdf-upload-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.course-pdf-upload-button.uploading {
+    cursor: wait;
+}
+
+/* UPLOADED PDF LIST */
+
+.course-pdf-library-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.course-pdf-library-heading h3 {
+    margin: 0 0 5px;
+    color: #101e35;
+    font-size: 18px;
+}
+
+.course-pdf-library-heading p {
+    margin: 0;
+    color: #8792a2;
+    font-size: 12px;
+}
+
+.course-pdf-count {
+    min-width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f3e8;
+    color: #98752e;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.course-pdf-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.course-pdf-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 17px;
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 12px;
+}
+
+.course-pdf-card-icon {
+    width: 45px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #fff0f0;
+    border-radius: 9px;
+    color: #c13b3b;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.course-pdf-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.course-pdf-card-content h3 {
+    margin: 0 0 6px;
+    color: #17243a;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.course-pdf-file-name {
+    margin: 0 0 5px;
+    color: #7b8798;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+.course-pdf-file-size {
+    color: #9aa3b0;
+    font-size: 10px;
+}
+
+.course-pdf-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.course-pdf-open {
+    display: inline-block;
+    padding: 9px 12px;
+    background: #f0f4fa;
+    color: #203b60;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.course-pdf-delete {
+    padding: 9px 12px;
+    background: #fff0f0;
+    color: #b42318;
+    border: 1px solid #f3d0d0;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.course-pdf-delete:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.course-pdf-unavailable {
+    color: #9b6a20;
+    font-size: 11px;
+}
+
+/* EMPTY STATE */
+
+.course-pdf-empty {
+    padding: 35px 20px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px dashed #d7dee8;
+    border-radius: 13px;
+}
+
+.course-pdf-empty-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 13px;
+    background: #fff0f0;
+    color: #c13b3b;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.course-pdf-empty h3 {
+    margin: 0 0 7px;
+    color: #26364d;
+    font-size: 15px;
+}
+
+.course-pdf-empty p {
+    margin: 0;
+    color: #8994a4;
+    font-size: 12px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .course-pdf-header {
+        padding: 18px;
+        flex-direction: column;
+    }
+
+    .course-pdf-back {
+        align-self: flex-start;
+    }
+
+    .course-pdf-upload-card {
+        padding: 18px;
+    }
+
+    .course-pdf-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .course-pdf-card-content {
+        width: calc(100% - 65px);
+    }
+
+    .course-pdf-card-actions {
+        width: 100%;
+        padding-left: 60px;
+    }
+
+    .course-pdf-upload-heading h3 {
+        font-size: 17px;
+    }
+       }
+   
