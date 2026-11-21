@@ -503,8 +503,13 @@ import {
 
     return;
           }
-          else if (section === "assignments") {
+          if (section === "assignments") {
+
+    pageTitle.textContent = "Assignments";
+
     await loadStudentAssignments(content);
+
+    return;
           }
 
 
