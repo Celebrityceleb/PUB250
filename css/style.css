@@ -4636,3 +4636,294 @@ input {
     }
 
 }
+/* =========================================
+   PUB250 STUDENT MATERIALS — DESIGN
+========================================= */
+
+.student-material-filter-panel {
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 15px;
+    padding: 22px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 16px rgba(16, 30, 53, 0.04);
+}
+
+.student-material-filter-panel .admin-panel-heading {
+    margin-bottom: 20px;
+}
+
+.student-material-filter-panel .admin-panel-heading h3 {
+    color: #101e35;
+    font-size: 17px;
+    font-weight: 750;
+    margin: 0;
+}
+
+.student-material-filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.student-material-filters label {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.student-material-filters select {
+    width: 100%;
+    min-width: 0;
+    height: 46px;
+    padding: 0 12px;
+    border: 1px solid #dce2eb;
+    border-radius: 9px;
+    background: #f8fafc;
+    color: #101e35;
+    font-size: 13px;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.student-material-filters select:focus {
+    border-color: #c49a36;
+    box-shadow: 0 0 0 3px rgba(196, 154, 54, 0.12);
+    background: #ffffff;
+}
+
+
+/* =========================================
+   MATERIAL LIBRARY HEADING
+========================================= */
+
+.student-course-library-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 28px 0 17px;
+}
+
+.student-course-library-heading h3 {
+    color: #101e35;
+    font-size: 18px;
+    font-weight: 750;
+    margin: 0;
+}
+
+.student-course-library-heading span {
+    background: #f5f1e6;
+    color: #987326;
+    border: 1px solid #eadcb9;
+    padding: 7px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   MATERIAL CARD
+========================================= */
+
+.student-material-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+.student-material-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(16, 30, 53, 0.035);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.student-material-card:hover {
+    border-color: #d7bd7a;
+    box-shadow: 0 7px 20px rgba(16, 30, 53, 0.07);
+    transform: translateY(-2px);
+}
+
+.student-material-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.student-material-file-label {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    background: #fff1f0;
+    color: #bd4640;
+    padding: 5px 9px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+}
+
+.student-material-info > strong {
+    color: #101e35;
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.student-material-info > span:not(.student-material-file-label) {
+    color: #64748b;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.student-material-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px 14px;
+    margin-top: 5px;
+}
+
+.student-material-metadata span {
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   MATERIAL ACTION BUTTONS
+========================================= */
+
+.student-material-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 9px;
+    flex-shrink: 0;
+}
+
+.student-material-save,
+.student-material-open {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 15px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 750;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.student-material-save {
+    background: #f8fafc;
+    border: 1px solid #dce2eb;
+    color: #101e35;
+}
+
+.student-material-save:hover {
+    background: #f5f1e6;
+    border-color: #c49a36;
+    color: #987326;
+}
+
+.student-material-save:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.student-material-open {
+    background: #101e35;
+    border: 1px solid #101e35;
+    color: #ffffff;
+}
+
+.student-material-open:hover {
+    background: #1c3558;
+    border-color: #1c3558;
+}
+
+.student-material-unavailable {
+    color: #c2413b;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   EMPTY MATERIAL STATE
+========================================= */
+
+.student-material-list + .admin-panel {
+    margin-top: 12px;
+}
+
+
+/* =========================================
+   RESPONSIVE MATERIAL DESIGN
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .student-material-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .student-material-filter-panel {
+        padding: 17px;
+    }
+
+    .student-material-filters {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .student-material-card {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 16px;
+        padding: 17px;
+    }
+
+    .student-material-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+
+    .student-material-save,
+    .student-material-open {
+        width: 100%;
+        padding: 0 8px;
+    }
+
+    .student-course-library-heading h3 {
+        font-size: 16px;
+    }
+
+   }
+   
