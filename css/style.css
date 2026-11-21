@@ -6026,3 +6026,230 @@ input {
         gap: 6px;
     }
 }
+/* =========================================
+   STUDENT ASSIGNMENTS
+========================================= */
+
+.student-assignments-page {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.student-assignments-heading {
+    margin-bottom: 2px;
+}
+
+.student-assignments-heading h2 {
+    color: #101e35;
+    font-size: 23px;
+    margin: 0 0 7px;
+}
+
+.student-assignments-heading p {
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.student-assignments-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+
+.student-assignment-card {
+    background: #ffffff;
+    border: 1px solid #e7ebf1;
+    border-radius: 13px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(16, 30, 53, 0.04);
+}
+
+.student-assignment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.student-assignment-course {
+    display: inline-block;
+    background: #fdf6e8;
+    color: #a87820;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    margin-bottom: 9px;
+}
+
+.student-assignment-header h3 {
+    color: #101e35;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.student-assignment-body {
+    padding: 17px 0;
+}
+
+.student-assignment-body p {
+    color: #46546a;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.student-assignment-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 15px;
+    background: #f7f9fc;
+    border-radius: 9px;
+}
+
+.student-assignment-meta div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.student-assignment-meta small {
+    color: #8490a1;
+    font-size: 11px;
+}
+
+.student-assignment-meta strong {
+    color: #101e35;
+    font-size: 13px;
+}
+
+.student-assignment-documents {
+    margin-top: 19px;
+}
+
+.student-assignment-documents h4 {
+    color: #101e35;
+    font-size: 14px;
+    margin: 0 0 12px;
+}
+
+.student-assignment-file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #e9edf2;
+    border-radius: 8px;
+    margin-top: 9px;
+}
+
+.student-assignment-file-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.student-assignment-file-name {
+    color: #26364d;
+    font-size: 13px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.student-assignment-file-info small {
+    color: #929cab;
+    font-size: 11px;
+}
+
+.student-assignment-download {
+    flex-shrink: 0;
+    display: inline-block;
+    background: #101e35;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 9px 14px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.student-assignment-download:hover {
+    background: #b58a3a;
+}
+
+.student-assignment-file-error {
+    color: #c04444;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+
+.student-assignment-empty,
+.student-assignment-loading {
+    background: #ffffff;
+    border: 1px solid #e7ebf1;
+    border-radius: 12px;
+    padding: 35px 22px;
+    text-align: center;
+}
+
+.student-assignment-empty h3 {
+    color: #101e35;
+    font-size: 18px;
+    margin: 0 0 9px;
+}
+
+.student-assignment-empty p,
+.student-assignment-loading p {
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.student-assignment-retry {
+    margin-top: 18px;
+    background: #101e35;
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+    .student-assignment-card {
+        padding: 16px;
+    }
+
+    .student-assignment-meta {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .student-assignment-file {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .student-assignment-download {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+       }
