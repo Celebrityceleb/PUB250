@@ -4927,3 +4927,363 @@ input {
 
    }
    
+/* =========================================
+   PUB250 — ANNOUNCEMENTS ADMIN DESIGN
+========================================= */
+
+.announcement-form-panel,
+.announcement-list-panel {
+    border: 1px solid #e5e9f0;
+    border-radius: 15px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgba(16, 30, 53, 0.04);
+}
+
+.announcement-form-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.announcement-form-panel label {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.announcement-form-panel input[type="text"],
+.announcement-form-panel select,
+.announcement-form-panel textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #dce2eb;
+    border-radius: 9px;
+    background: #f8fafc;
+    color: #101e35;
+    padding: 13px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.announcement-form-panel input[type="text"],
+.announcement-form-panel select {
+    min-height: 46px;
+}
+
+.announcement-form-panel textarea {
+    resize: vertical;
+    line-height: 1.7;
+    min-height: 150px;
+}
+
+.announcement-form-panel input:focus,
+.announcement-form-panel select:focus,
+.announcement-form-panel textarea:focus {
+    border-color: #c49a36;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(196, 154, 54, 0.12);
+}
+
+.announcement-content-label {
+    margin-bottom: 18px;
+}
+
+.announcement-pin-option {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 10px !important;
+    margin: 18px 0;
+    cursor: pointer;
+}
+
+.announcement-pin-option input {
+    width: 17px;
+    height: 17px;
+    accent-color: #b38a2e;
+}
+
+.announcement-form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.admin-primary-button,
+.admin-secondary-button {
+    min-height: 43px;
+    padding: 0 19px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.admin-primary-button {
+    background: #101e35;
+    border: 1px solid #101e35;
+    color: #ffffff;
+}
+
+.admin-primary-button:hover {
+    background: #1d3557;
+}
+
+.admin-secondary-button {
+    background: #f8fafc;
+    border: 1px solid #dce2eb;
+    color: #334155;
+}
+
+.admin-primary-button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+
+/* ANNOUNCEMENT TOOLBAR */
+
+.announcement-toolbar {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.announcement-toolbar input,
+.announcement-toolbar select {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid #dce2eb;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #101e35;
+    font-family: inherit;
+    font-size: 12px;
+    outline: none;
+}
+
+.announcement-toolbar input:focus,
+.announcement-toolbar select:focus {
+    border-color: #c49a36;
+}
+
+
+/* ANNOUNCEMENT RECORDS */
+
+.announcement-record-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.announcement-record-card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 19px;
+    border: 1px solid #e5e9f0;
+    border-radius: 12px;
+    background: #ffffff;
+    transition: 0.2s ease;
+}
+
+.announcement-record-card:hover {
+    border-color: #d7bd7a;
+    box-shadow: 0 5px 16px rgba(16, 30, 53, 0.05);
+}
+
+.announcement-record-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.announcement-record-labels {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 12px;
+}
+
+.announcement-category-badge,
+.announcement-status-badge,
+.announcement-pinned-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.category-general {
+    background: #edf2f7;
+    color: #475569;
+}
+
+.category-urgent {
+    background: #fff0ef;
+    color: #bd3939;
+}
+
+.category-academic {
+    background: #f5f1e6;
+    color: #987326;
+}
+
+.status-published {
+    background: #e9f7ef;
+    color: #247747;
+}
+
+.status-draft {
+    background: #fff5df;
+    color: #987326;
+}
+
+.announcement-pinned-badge {
+    background: #eef2ff;
+    color: #4658a5;
+}
+
+.announcement-record-main h4 {
+    color: #101e35;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 9px;
+    overflow-wrap: anywhere;
+}
+
+.announcement-record-main > p {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.75;
+    margin: 0 0 13px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.announcement-record-date {
+    color: #94a3b8;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.announcement-record-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 7px;
+    flex-shrink: 0;
+}
+
+.announcement-action-button {
+    min-height: 34px;
+    padding: 0 11px;
+    border: 1px solid #dce2eb;
+    border-radius: 7px;
+    background: #f8fafc;
+    color: #334155;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.announcement-action-button:hover {
+    border-color: #c49a36;
+    color: #987326;
+    background: #fdfaf2;
+}
+
+.publish-announcement-button {
+    background: #101e35;
+    color: #ffffff;
+    border-color: #101e35;
+}
+
+.publish-announcement-button:hover {
+    background: #1d3557;
+    color: #ffffff;
+    border-color: #1d3557;
+}
+
+.delete-announcement-button:hover {
+    background: #fff0ef;
+    border-color: #e6aaa6;
+    color: #bd3939;
+}
+
+.announcement-empty-search {
+    padding: 30px 15px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+    .announcement-record-card {
+        flex-direction: column;
+    }
+
+    .announcement-record-actions {
+        justify-content: flex-start;
+        width: 100%;
+    }
+}
+
+@media (max-width: 650px) {
+    .announcement-form-panel,
+    .announcement-list-panel {
+        padding: 17px;
+    }
+
+    .announcement-form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .announcement-toolbar {
+        grid-template-columns: 1fr;
+    }
+
+    .announcement-record-card {
+        padding: 15px;
+    }
+
+    .announcement-record-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .announcement-action-button {
+        min-height: 39px;
+    }
+
+    .announcement-form-actions {
+        flex-direction: column;
+    }
+
+    .announcement-form-actions button {
+        width: 100%;
+    }
+       }
