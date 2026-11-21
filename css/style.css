@@ -5500,3 +5500,159 @@ input {
     }
 
    }
+
+/* =========================================
+   PUB250 — ADMIN ASSIGNMENTS STYLING
+========================================= */
+
+.assignment-record-card {
+    gap: 20px;
+}
+
+.assignment-record-text {
+    margin: 12px 0;
+    color: #526176;
+    font-size: 13px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 130px;
+    overflow: hidden;
+}
+
+.assignment-record-dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    margin-top: 15px;
+    color: #64748b;
+    font-size: 11px;
+}
+
+.assignment-record-dates strong {
+    color: #101e35;
+}
+
+.assignment-document-count {
+    margin-top: 13px;
+    color: #987326;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* SELECTED DOCUMENTS */
+
+#assignmentSelectedFiles {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 13px;
+}
+
+.assignment-no-files {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.assignment-selected-file,
+.assignment-existing-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #f8fafc;
+    border: 1px solid #e5e9f0;
+    border-radius: 9px;
+}
+
+.assignment-selected-file > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.assignment-selected-file strong {
+    color: #334155;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.assignment-selected-file span {
+    color: #94a3b8;
+    font-size: 10px;
+}
+
+.assignment-remove-file,
+.assignment-delete-document {
+    flex-shrink: 0;
+    padding: 7px 10px;
+    background: #fff0ef;
+    border: none;
+    border-radius: 7px;
+    color: #bd3939;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.assignment-existing-documents {
+    margin-top: 22px;
+}
+
+.assignment-existing-documents h3 {
+    margin-bottom: 12px;
+    color: #101e35;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.assignment-existing-file {
+    margin-bottom: 9px;
+    color: #475569;
+    font-size: 12px;
+}
+
+
+/* FILE INPUT */
+
+#assignmentDocuments {
+    padding: 13px;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 9px;
+    color: #475569;
+    font-size: 12px;
+    width: 100%;
+}
+
+
+/* ASSIGNMENT FORM */
+
+#assignmentText {
+    min-height: 180px;
+    resize: vertical;
+    line-height: 1.8;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+    .assignment-record-dates {
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .assignment-selected-file,
+    .assignment-existing-file {
+        align-items: flex-start;
+    }
+
+    .assignment-record-text {
+        font-size: 12px;
+    }
+}
+
