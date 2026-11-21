@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101E35">
+
+    <title>Student Dashboard | PUB250</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="admin-dashboard-page">
+
+    <div class="admin-layout">
+
+        <!-- STUDENT SIDEBAR -->
+        <aside class="admin-sidebar" id="studentSidebar">
+
+            <div class="admin-sidebar-brand">
+                <div class="admin-brand-icon">P</div>
+
+                <div>
+                    <h2>PUB250</h2>
+                    <span>STUDENT PORTAL</span>
+                </div>
+            </div>
+
+            <!-- STUDENT PROFILE -->
+            <div class="admin-user-card">
+
+                <div class="admin-avatar" id="studentAvatar">
+                    S
+                </div>
+
+                <div class="admin-user-info">
+                    <strong id="studentName">Loading...</strong>
+                    <span id="studentMatric">Verifying account</span>
+                </div>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+            <nav class="admin-navigation">
+
+                <p class="admin-nav-heading">MY WORKSPACE</p>
+
+                <button class="admin-nav-item active"
+                    data-section="overview">
+                    <span>▦</span> Overview
+                </button>
+
+
+                <p class="admin-nav-heading">ACADEMIC RESOURCES</p>
+
+                <button class="admin-nav-item"
+                    data-section="courses">
+                    <span>▤</span> Courses
+                </button>
+
+                <button class="admin-nav-item"
+                    data-section="materials">
+                    <span>▣</span> Lecture Materials
+                </button>
+
+                <button class="admin-nav-item"
+                    data-section="past-questions">
+                    <span>▧</span> Past Questions
+                </button>
+
+                <button class="admin-nav-item"
+                    data-section="saved">
+                    <span>☆</span> Saved Materials
+                </button>
+
+
+                <p class="admin-nav-heading">CLASS INFORMATION</p>
+
+                <button class="admin-nav-item"
+                    data-section="announcements">
+                    <span>◉</span> Announcements
+                </button>
+
+                <button class="admin-nav-item"
+                    data-section="assignments">
+                    <span>☷</span> Assignments
+                </button>
+
+                <button class="admin-nav-item"
+                    data-section="timetable">
+                    <span>◷</span> Timetable
+                </button>
+
+                <button class="admin-nav-item"
+                    data-section="calendar">
+                    <span>▦</span> Academic Calendar
+                </button>
+
+                <button class="admin-nav-item"
+                    data-section="directory">
+                    <span>♧</span> Student Directory
+                </button>
+
+
+                <p class="admin-nav-heading">ACCOUNT</p>
+
+                <button class="admin-nav-item"
+                    data-section="profile">
+                    <span>♙</span> My Profile
+                </button>
+
+            </nav>
+
+
+            <button class="admin-logout-button" id="studentLogout">
+                ↪ Sign Out
+            </button>
+
+        </aside>
+
+
+        <!-- MAIN DASHBOARD -->
+        <main class="admin-main">
+
+            <!-- TOP BAR -->
+            <header class="admin-topbar">
+
+                <button class="admin-menu-toggle"
+                    id="studentMenuToggle">
+                    ☰
+                </button>
+
+                <div>
+                    <span class="admin-topbar-label">
+                        PUB250 STUDENT PORTAL
+                    </span>
+
+                    <h1 id="studentPageTitle">Overview</h1>
+                </div>
+
+                <div class="admin-topbar-status">
+                    <span class="admin-status-dot"></span>
+                    Secure Student Session
+                </div>
+
+            </header>
+
+
+            <!-- PAGE CONTENT -->
+            <section class="admin-content" id="studentContent">
+
+                <!-- WELCOME -->
+                <div class="admin-welcome">
+
+                    <div>
+                        <span class="admin-section-eyebrow">
+                            STUDENT WORKSPACE
+                        </span>
+
+                        <h2>
+                            Welcome,
+                            <span id="welcomeName">Student</span>
+                        </h2>
+
+                        <p>
+                            Your academic workspace for Public Administration.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- ACADEMIC INFORMATION -->
+                <div class="admin-stat-grid">
+
+                    <article class="admin-stat-card">
+                        <span>Programme</span>
+
+                        <strong style="font-size:18px;">
+                            Public Administration
+                        </strong>
+
+                        <small>University of Benin</small>
+                    </article>
+
+
+                    <article class="admin-stat-card">
+                        <span>Current Level</span>
+
+                        <strong>200L</strong>
+
+                        <small>Second year</small>
+                    </article>
+
+
+                    <article class="admin-stat-card">
+                        <span>Admission Set</span>
+
+                        <strong>2025</strong>
+
+                        <small>Academic cohort</small>
+                    </article>
+
+                </div>
+
+
+                <!-- QUICK ACCESS -->
+                <div class="admin-panel">
+
+                    <div class="admin-panel-heading">
+                        <div>
+                            <span class="admin-section-eyebrow">
+                                QUICK ACCESS
+                            </span>
+
+                            <h3>Your Academic Resources</h3>
+                        </div>
+                    </div>
+
+                    <p class="admin-placeholder">
+                        Access your courses, learning materials and
+                        examination resources from here.
+                    </p>
+
+                    <div style="
+                        display:flex;
+                        flex-wrap:wrap;
+                        gap:10px;
+                        margin-top:20px;
+                    ">
+
+                        <button class="admin-action-button"
+                            data-open-section="courses">
+                            View Courses
+                        </button>
+
+                        <button class="admin-action-button"
+                            data-open-section="materials">
+                            Lecture Materials
+                        </button>
+
+                        <button class="admin-action-button"
+                            data-open-section="past-questions">
+                            Past Questions
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ANNOUNCEMENTS -->
+                <div class="admin-panel" style="margin-top:22px;">
+
+                    <div class="admin-panel-heading">
+                        <div>
+                            <span class="admin-section-eyebrow">
+                                CLASS UPDATES
+                            </span>
+
+                            <h3>Announcements</h3>
+                        </div>
+                    </div>
+
+                    <p class="admin-placeholder">
+                        Official announcements from your class
+                        administration will appear here.
+                    </p>
+
+                    <button class="admin-action-button"
+                        style="margin-top:15px;"
+                        data-open-section="announcements">
+                        View Announcements
+                    </button>
+
+                </div>
+
+
+                <!-- ACCOUNT INFORMATION -->
+                <div class="admin-panel" style="margin-top:22px;">
+
+                    <div class="admin-panel-heading">
+                        <div>
+                            <span class="admin-section-eyebrow">
+                                ACCOUNT
+                            </span>
+
+                            <h3>Your Student Account</h3>
+                        </div>
+                    </div>
+
+                    <p class="admin-placeholder">
+                        Your approved student account is active.
+                        Your academic resources will be made available
+                        through this dashboard.
+                    </p>
+
+                    <button class="admin-action-button"
+                        style="margin-top:15px;"
+                        data-open-section="profile">
+                        View My Profile
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- DASHBOARD FUNCTIONALITY -->
+    <script type="module">
+
+        import {
+            requireStudent,
+            logout
+        } from "./js/auth.js";
+import {
+    loadStudentCourses
+} from "./js/student-courses.js";
+import {
+    loadStudentMaterials
+} from "./js/student-materials.js";
+      import {
+    loadStudentSavedMaterials
+} from "./js/student-materials.js";
+      import {
+    loadStudentAnnouncements
+} from "./js/student-announcements.js";
+      import {
+    loadStudentPastQuestions
+} from "./js/student-past-questions.js";
+        const sidebar =
+            document.getElementById("studentSidebar");
+
+        const content =
+            document.getElementById("studentContent");
+
+        const pageTitle =
+            document.getElementById("studentPageTitle");
+
+
+        let studentProfile = null;
+
+
+        // Preserve the original dashboard overview.
+        const overviewHTML = content.innerHTML;
+
+
+        // Student module descriptions.
+        const moduleDetails = {
+
+            courses: {
+                eyebrow: "ACADEMIC RESOURCES",
+                title: "Courses",
+                description:
+                    "Your first-semester and second-semester courses will appear here.",
+                note:
+                    "Course information will be published and managed by your administrators."
+            },
+
+            materials: {
+                eyebrow: "LEARNING RESOURCES",
+                title: "Lecture Materials",
+                description:
+                    "Access lecture notes, PDF documents, presentations and other learning materials.",
+                note:
+                    "You will be able to open and download materials uploaded by your administrators."
+            },
+
+            "past-questions": {
+                eyebrow: "EXAMINATION RESOURCES",
+                title: "Past Questions",
+                description:
+                    "Access previous examination questions and revision resources.",
+                note:
+                    "Past questions will be organised by course and semester."
+            },
+
+            saved: {
+                eyebrow: "PERSONAL LIBRARY",
+                title: "Saved Materials",
+                description:
+                    "Keep useful lecture materials and academic resources together.",
+                note:
+                    "Materials you save will appear in this section."
+            },
+
+            announcements: {
+                eyebrow: "CLASS INFORMATION",
+                title: "Announcements",
+                description:
+                    "Stay informed about official class announcements and important updates.",
+                note:
+                    "Only authorised class administrators can publish official announcements."
+            },
+
+            assignments: {
+                eyebrow: "ACADEMIC ACTIVITIES",
+                title: "Assignments",
+                description:
+                    "View published assignments and download their instructions.",
+                note:
+                    "This version provides assignment viewing and downloading."
+            },
+
+            timetable: {
+                eyebrow: "CLASS INFORMATION",
+                title: "Timetable",
+                description:
+                    "View your lecture timetable and scheduled academic activities.",
+                note:
+                    "Your official timetable will appear here when published."
+            },
+
+            calendar: {
+                eyebrow: "ACADEMIC PLANNING",
+                title: "Academic Calendar",
+                description:
+                    "Keep track of important academic dates, deadlines and events.",
+                note:
+                    "Calendar information will be managed by your administrators."
+            },
+
+            directory: {
+                eyebrow: "CLASS COMMUNITY",
+                title: "Student Directory",
+                description:
+                    "Find other students in the PUB250 admission set.",
+                note:
+                    "The directory will display student names and optional profile photos. Personal phone numbers and email addresses will not be publicly displayed."
+            }
+
+        };
+
+
+        // Render the selected dashboard section.
+        async function openSection(section) {
+
+            document.querySelectorAll(".admin-nav-item")
+                .forEach(button => {
+
+                    button.classList.toggle(
+                        "active",
+                        button.dataset.section === section
+                    );
+
+                });
+
+
+            sidebar.classList.remove("open");
+
+
+            if (section === "overview") {
+
+                pageTitle.textContent = "Overview";
+                content.innerHTML = overviewHTML;
+
+                return;
+            }
+          if (section === "courses") {
+
+    pageTitle.textContent = "Courses";
+
+    await loadStudentCourses(content);
+
+    return;
+          }
+          if (section === "materials") {
+    pageTitle.textContent = "Lecture Materials";
+    await loadStudentMaterials(content);
+    return;
+          }
+          if (section === "saved") {
+
+    pageTitle.textContent = "Saved Materials";
+
+    await loadStudentSavedMaterials(content);
+
+    return;
+          }
+          if (section === "past-questions") {
+
+    pageTitle.textContent = "Past Questions";
+
+    await loadStudentPastQuestions(content);
+
+    return;
+          }
+          if (section === "announcements") {
+
+    pageTitle.textContent = "Announcements";
+
+    await loadStudentAnnouncements(content);
+
+    return;
+          }
+
+
+            if (section === "profile") {
+
+                pageTitle.textContent = "My Profile";
+
+                content.innerHTML = `
+                    <div class="admin-welcome">
+                        <div>
+                            <span class="admin-section-eyebrow">
+                                ACCOUNT INFORMATION
+                            </span>
+
+                            <h2>My Profile</h2>
+
+                            <p>View your registered student details.</p>
+                        </div>
+                    </div>
+
+                    <div class="admin-panel">
+
+                        <div class="registration-card-top">
+
+                            <div class="registration-student-avatar"
+                                id="profileAvatar">
+                                S
+                            </div>
+
+                            <div class="registration-student-info">
+                                <h4 id="profileName">Loading...</h4>
+                                <span>Approved Student Account</span>
+                            </div>
+
+                            <span class="registration-status approved">
+                                Approved
+                            </span>
+
+                        </div>
+
+                        <div class="registration-details">
+
+                            <p>
+                                <span>Full Name</span>
+                                <strong id="profileFullName">—</strong>
+                            </p>
+
+                            <p>
+                                <span>Matriculation Number</span>
+                                <strong id="profileMatric">—</strong>
+                            </p>
+
+                            <p>
+                                <span>Email Address</span>
+                                <strong id="profileEmail">—</strong>
+                            </p>
+
+                            <p>
+                                <span>Programme</span>
+                                Public Administration
+                            </p>
+
+                            <p>
+                                <span>Admission Set</span>
+                                2025
+                            </p>
+
+                            <p>
+                                <span>Account Status</span>
+                                Approved
+                            </p>
+
+                        </div>
+
+                    </div>
+                `;
+
+
+                document.getElementById("profileAvatar").textContent =
+                    (studentProfile.full_name || "S")
+                        .charAt(0).toUpperCase();
+
+                document.getElementById("profileName").textContent =
+                    studentProfile.full_name || "Student";
+
+                document.getElementById("profileFullName").textContent =
+                    studentProfile.full_name || "Not available";
+
+                document.getElementById("profileMatric").textContent =
+                    studentProfile.matric_no || "Not available";
+
+                document.getElementById("profileEmail").textContent =
+                    studentProfile.email || "Not available";
+
+                return;
+            }
+
+
+            const details = moduleDetails[section];
+
+            if (!details) return;
+
+
+            pageTitle.textContent = details.title;
+
+
+            content.innerHTML = `
+                <div class="admin-welcome">
+                    <div>
+                        <span class="admin-section-eyebrow">
+                            ${details.eyebrow}
+                        </span>
+
+                        <h2>${details.title}</h2>
+
+                        <p>${details.description}</p>
+                    </div>
+                </div>
+
+                <div class="admin-panel">
+
+                    <div class="admin-panel-heading">
+                        <h3>${details.title}</h3>
+                    </div>
+
+                    <p class="admin-placeholder">
+                        ${details.note}
+                    </p>
+
+                </div>
+            `;
+
+        }
+
+
+        // Main navigation.
+        document.querySelectorAll(".admin-nav-item")
+            .forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    openSection(button.dataset.section);
+
+                });
+
+            });
+
+
+        // Quick access buttons inside dashboard content.
+        content.addEventListener("click", event => {
+
+            const button =
+                event.target.closest("[data-open-section]");
+
+            if (!button) return;
+
+            openSection(button.dataset.openSection);
+
+        });
+
+
+        // Mobile sidebar.
+        document.getElementById("studentMenuToggle")
+            .addEventListener("click", () => {
+
+                sidebar.classList.toggle("open");
+
+            });
+
+
+        // Student sign out.
+        document.getElementById("studentLogout")
+            .addEventListener("click", async () => {
+
+                try {
+
+                    await logout();
+
+                } catch (error) {
+
+                    alert(error.message);
+
+                }
+
+            });
+
+
+        // Verify and initialise student dashboard.
+        async function initialiseDashboard() {
+
+            try {
+
+                studentProfile = await requireStudent();
+
+                if (!studentProfile) return;
+
+
+                const name =
+                    studentProfile.full_name || "Student";
+
+                document.getElementById("studentName").textContent =
+                    name;
+
+                document.getElementById("welcomeName").textContent =
+                    name;
+
+                document.getElementById("studentAvatar").textContent =
+                    name.charAt(0).toUpperCase();
+
+                document.getElementById("studentMatric").textContent =
+                    studentProfile.matric_no || "Student Account";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Student dashboard initialisation failed:",
+                    error
+                );
+
+                window.location.href = "login.html";
+
+            }
+
+        }
+
+
+        initialiseDashboard();
+
+    </script>
+</body>
+</html>
