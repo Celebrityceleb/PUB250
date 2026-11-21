@@ -326,6 +326,9 @@ import {
 import {
     loadStudentMaterials
 } from "./js/student-materials.js";
+        import {
+    loadStudentSavedMaterials
+} from "./js/student-materials.js";
       import {
     loadStudentPastQuestions
 } from "./js/student-past-questions.js";
@@ -470,6 +473,14 @@ import {
     await loadStudentMaterials(content);
     return;
           }
+            if (section === "saved") {
+
+    pageTitle.textContent = "Saved Materials";
+
+    await loadStudentSavedMaterials(content);
+
+    return;
+        }
           if (section === "past-questions") {
 
     pageTitle.textContent = "Past Questions";
