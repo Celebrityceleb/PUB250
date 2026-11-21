@@ -706,6 +706,19 @@ function openPastQuestionForm(id = null) {
 
         });
 
+    /* =================================
+       INITIAL FILE VALIDATION
+    ================================= */
+
+    const initialIsPDF =
+        document.getElementById("pqFileType").value === "pdf";
+
+    document.getElementById("pqPdfFile").required =
+        initialIsPDF && !existing;
+
+    document.getElementById("pqImageFiles").required =
+        !initialIsPDF && !existing;
+
     document.getElementById("pqRecordForm")
         .addEventListener("submit", savePastQuestion);
 
