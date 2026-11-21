@@ -5287,3 +5287,216 @@ input {
         width: 100%;
     }
        }
+/* =========================================
+   PUB250 — STUDENT ANNOUNCEMENTS
+========================================= */
+
+.student-announcement-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 23px;
+    margin-bottom: 25px;
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(16, 30, 53, 0.04);
+}
+
+.student-announcement-summary > div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.student-announcement-summary > div span {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.student-announcement-summary > div strong {
+    color: #101e35;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.student-announcement-summary-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #f5f1e6;
+    color: #a27b29;
+    font-size: 23px;
+}
+
+
+/* ANNOUNCEMENT LIST */
+
+.student-announcement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.student-announcement-card {
+    position: relative;
+    padding: 23px;
+    background: #ffffff;
+    border: 1px solid #e5e9f0;
+    border-radius: 14px;
+    box-shadow: 0 3px 13px rgba(16, 30, 53, 0.035);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+}
+
+.student-announcement-card:hover {
+    border-color: #d7bd7a;
+    box-shadow: 0 7px 20px rgba(16, 30, 53, 0.06);
+}
+
+
+/* PINNED ANNOUNCEMENTS */
+
+.student-announcement-pinned {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 12px;
+    margin: -23px -23px 19px;
+    background: #fbf6e9;
+    border-bottom: 1px solid #eee1c2;
+    color: #987326;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+}
+
+
+/* CARD HEADER */
+
+.student-announcement-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.student-announcement-category {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.student-announcement-card-header .category-general {
+    background: #edf2f7;
+    color: #475569;
+}
+
+.student-announcement-card-header .category-urgent {
+    background: #fff0ef;
+    color: #bd3939;
+}
+
+.student-announcement-card-header .category-academic {
+    background: #f5f1e6;
+    color: #987326;
+}
+
+.student-announcement-date {
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* CARD CONTENT */
+
+.student-announcement-card h3 {
+    margin: 0 0 12px;
+    color: #101e35;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.student-announcement-content {
+    margin: 0;
+    color: #526176;
+    font-size: 13px;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+
+/* EMPTY STATE */
+
+.student-announcement-empty {
+    padding: 45px 20px;
+    text-align: center;
+    border: 1px solid #e5e9f0;
+    border-radius: 14px;
+}
+
+.student-announcement-empty h3 {
+    color: #101e35;
+    font-size: 17px;
+    margin: 13px 0 8px;
+}
+
+.student-announcement-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    margin: 0 auto;
+    border-radius: 16px;
+    background: #f5f1e6;
+    color: #a27b29;
+    font-size: 27px;
+}
+
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 650px) {
+
+    .student-announcement-summary {
+        padding: 18px;
+    }
+
+    .student-announcement-card {
+        padding: 18px;
+    }
+
+    .student-announcement-pinned {
+        margin: -18px -18px 16px;
+    }
+
+    .student-announcement-card h3 {
+        font-size: 16px;
+    }
+
+    .student-announcement-content {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    .student-announcement-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+   }
