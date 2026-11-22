@@ -6769,3 +6769,351 @@ input {
     }
 
 }
+/* =========================================
+   STUDENT TIMETABLE
+========================================= */
+
+.student-timetable-page {
+    width: 100%;
+}
+
+.student-timetable-heading {
+    margin-bottom: 24px;
+}
+
+.student-timetable-eyebrow {
+    display: inline-block;
+    color: #B18A3D;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.student-timetable-heading h2 {
+    color: #101E35;
+    font-size: 25px;
+    font-weight: 800;
+    margin: 0 0 8px;
+}
+
+.student-timetable-heading p {
+    color: #718096;
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* TIMETABLE TABS */
+
+.student-timetable-tabs {
+    display: flex;
+    gap: 10px;
+    padding: 6px;
+    background: #F1F4F8;
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.student-timetable-tabs button {
+    flex: 1;
+    border: none;
+    border-radius: 9px;
+    padding: 13px 12px;
+    background: transparent;
+    color: #64748B;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.student-timetable-tabs button.active {
+    background: #101E35;
+    color: #FFFFFF;
+    box-shadow: 0 3px 10px rgba(16, 30, 53, 0.12);
+}
+
+/* SECTION */
+
+.student-timetable-section {
+    width: 100%;
+}
+
+.student-timetable-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.student-timetable-section-heading h3 {
+    color: #101E35;
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0;
+}
+
+/* LECTURE CARDS */
+
+.student-lecture-card {
+    background: #FFFFFF;
+    border: 1px solid #E5EAF0;
+    border-radius: 14px;
+    padding: 19px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 12px rgba(16, 30, 53, 0.035);
+}
+
+.student-lecture-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.student-lecture-course-code {
+    display: inline-block;
+    color: #A47B2C;
+    background: #FBF5E8;
+    border-radius: 6px;
+    padding: 5px 9px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.student-lecture-card h4 {
+    color: #101E35;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.student-lecture-status {
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.student-lecture-status.published {
+    background: #E8F7EE;
+    color: #18834A;
+}
+
+.student-lecture-status.cancelled {
+    background: #FDECEC;
+    color: #C03939;
+}
+
+/* LECTURE DETAILS */
+
+.student-lecture-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+    padding-top: 15px;
+    border-top: 1px solid #EDF0F4;
+}
+
+.student-lecture-details > div {
+    min-width: 0;
+}
+
+.student-lecture-details span {
+    display: block;
+    color: #8793A3;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 5px;
+}
+
+.student-lecture-details strong {
+    display: block;
+    color: #26364D;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+/* LECTURE NOTICES */
+
+.student-lecture-cancellation {
+    background: #FFF1F1;
+    border: 1px solid #F6D4D4;
+    color: #B83232;
+    border-radius: 9px;
+    padding: 11px 13px;
+    margin-top: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.student-lecture-note {
+    background: #F5F7FA;
+    border-radius: 9px;
+    padding: 11px 13px;
+    margin-top: 13px;
+    color: #64748B;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* EXAM TIMETABLE */
+
+.student-exam-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: #FFFFFF;
+    border: 1px solid #E5EAF0;
+    border-radius: 14px;
+    padding: 19px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 12px rgba(16, 30, 53, 0.035);
+}
+
+.student-exam-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FBF5E8;
+    color: #A47B2C;
+    border-radius: 12px;
+    font-size: 23px;
+}
+
+.student-exam-information {
+    flex: 1;
+    min-width: 0;
+}
+
+.student-exam-information h4 {
+    color: #101E35;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.5;
+    margin: 0 0 7px;
+}
+
+.student-exam-session {
+    color: #A47B2C;
+    font-size: 11px;
+    font-weight: 800;
+    margin-bottom: 9px;
+}
+
+.student-exam-file {
+    color: #8793A3;
+    font-size: 11px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.student-exam-download-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 14px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #101E35;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.student-exam-download-button:hover {
+    background: #B18A3D;
+}
+
+/* EMPTY AND LOADING STATES */
+
+.student-timetable-empty,
+.student-timetable-loading {
+    background: #FFFFFF;
+    border: 1px dashed #D8E0E9;
+    border-radius: 13px;
+    padding: 35px 20px;
+    text-align: center;
+    color: #8793A3;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.student-timetable-empty strong {
+    display: block;
+    color: #26364D;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 600px) {
+
+    .student-timetable-heading h2 {
+        font-size: 21px;
+    }
+
+    .student-timetable-tabs {
+        gap: 6px;
+    }
+
+    .student-timetable-tabs button {
+        padding: 12px 7px;
+        font-size: 11px;
+    }
+
+    .student-lecture-card {
+        padding: 15px;
+    }
+
+    .student-lecture-card h4 {
+        font-size: 14px;
+    }
+
+    .student-lecture-details {
+        gap: 12px 8px;
+    }
+
+    .student-lecture-details strong {
+        font-size: 11px;
+    }
+
+    .student-exam-card {
+        padding: 14px;
+        gap: 11px;
+    }
+
+    .student-exam-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 19px;
+    }
+
+    .student-exam-information h4 {
+        font-size: 13px;
+    }
+
+    .student-exam-download-button {
+        width: 100%;
+    }
+   }
