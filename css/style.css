@@ -6253,3 +6253,387 @@ input {
     }
 
        }
+/* =========================================
+   PUB250 ADMIN TIMETABLE
+========================================= */
+
+.admin-timetable-page,
+.exam-timetable-section {
+    width: 100%;
+    color: #24334a;
+}
+
+.admin-timetable-heading,
+.timetable-section-heading,
+.exam-records-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.admin-timetable-heading h2,
+.timetable-section-heading h3,
+.exam-records-heading h3 {
+    margin: 6px 0;
+    color: #101e35;
+}
+
+.admin-timetable-heading p,
+.timetable-section-heading p {
+    color: #788397;
+    font-size: 13px;
+    margin: 5px 0 0;
+}
+
+.timetable-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid #e5eaf1;
+    margin-bottom: 24px;
+    overflow-x: auto;
+}
+
+.timetable-tabs button {
+    border: none;
+    background: transparent;
+    color: #758197;
+    padding: 13px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+}
+
+.timetable-tabs button.active {
+    color: #101e35;
+    border-bottom-color: #c49a43;
+}
+
+.timetable-message {
+    padding: 13px 16px;
+    margin-bottom: 18px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.timetable-message.success {
+    background: #eaf7ef;
+    color: #247747;
+}
+
+.timetable-message.error {
+    background: #fff0f0;
+    color: #b52d36;
+}
+
+.timetable-loading,
+.timetable-empty {
+    background: #ffffff;
+    border: 1px solid #e8edf3;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    color: #7a8799;
+}
+
+.timetable-empty h3,
+.timetable-empty h4 {
+    color: #101e35;
+    margin-top: 0;
+}
+
+.timetable-form {
+    background: #ffffff;
+    border: 1px solid #e7ecf2;
+    border-radius: 13px;
+    padding: 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 15px rgba(16, 30, 53, 0.035);
+}
+
+.timetable-form h4 {
+    color: #101e35;
+    font-size: 16px;
+    margin: 0 0 20px;
+}
+
+.timetable-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.timetable-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.timetable-form-group label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #34445c;
+}
+
+.timetable-form-group input,
+.timetable-form-group select,
+.timetable-form-group textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #dce3ec;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #24334a;
+    font: inherit;
+    font-size: 13px;
+    outline: none;
+}
+
+.timetable-form-group input:focus,
+.timetable-form-group select:focus,
+.timetable-form-group textarea:focus {
+    border-color: #c49a43;
+    box-shadow: 0 0 0 3px rgba(196, 154, 67, 0.12);
+}
+
+.timetable-form-group small {
+    color: #8994a5;
+    font-size: 11px;
+}
+
+.timetable-primary-button,
+.timetable-secondary-button,
+.timetable-danger-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 38px;
+    padding: 9px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.timetable-primary-button {
+    border: 1px solid #101e35;
+    background: #101e35;
+    color: #ffffff;
+}
+
+.timetable-primary-button:hover {
+    background: #1c3457;
+}
+
+.timetable-secondary-button {
+    border: 1px solid #dce3ec;
+    background: #ffffff;
+    color: #34445c;
+}
+
+.timetable-secondary-button:hover {
+    background: #f3f6fa;
+}
+
+.timetable-danger-button {
+    border: 1px solid #f1d5d7;
+    background: #fff5f5;
+    color: #b52d36;
+}
+
+.timetable-danger-button:hover {
+    background: #ffe9e9;
+}
+
+.timetable-primary-button:disabled,
+.timetable-secondary-button:disabled,
+.timetable-danger-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.timetable-record-card {
+    background: #ffffff;
+    border: 1px solid #e7ecf2;
+    border-radius: 12px;
+    padding: 19px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 12px rgba(16, 30, 53, 0.025);
+}
+
+.timetable-record-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.timetable-course-code {
+    display: inline-block;
+    color: #b18a38;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.timetable-record-top h4 {
+    color: #101e35;
+    font-size: 15px;
+    margin: 0;
+}
+
+.timetable-record-top p {
+    color: #7a8799;
+    font-size: 12px;
+    margin: 6px 0 0;
+}
+
+.timetable-status {
+    flex-shrink: 0;
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.timetable-status.published {
+    background: #e8f6ed;
+    color: #247747;
+}
+
+.timetable-status.draft {
+    background: #fff5df;
+    color: #9b6b12;
+}
+
+.timetable-status.cancelled,
+.timetable-status.archived {
+    background: #f0f1f4;
+    color: #737d8d;
+}
+
+.timetable-record-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 15px 0;
+    border-top: 1px solid #edf0f4;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.timetable-record-details div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.timetable-record-details small {
+    color: #8994a5;
+    font-size: 11px;
+}
+
+.timetable-record-details strong {
+    color: #34445c;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.timetable-record-note {
+    color: #6d7a8e;
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 13px 0 0;
+}
+
+.timetable-record-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.exam-records-heading {
+    margin-top: 28px;
+}
+
+.exam-records-heading h3 {
+    font-size: 16px;
+}
+
+.exam-records-heading span {
+    color: #8994a5;
+    font-size: 12px;
+}
+
+.exam-file-information {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 0;
+    border-top: 1px solid #edf0f4;
+    color: #526176;
+    font-size: 12px;
+}
+
+.exam-file-information small {
+    color: #8994a5;
+}
+
+.exam-records-list {
+    width: 100%;
+}
+
+/* =========================================
+   MOBILE TIMETABLE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .admin-timetable-heading,
+    .timetable-section-heading {
+        align-items: flex-start;
+    }
+
+    .timetable-form {
+        padding: 16px;
+    }
+
+    .timetable-form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .timetable-record-card {
+        padding: 15px;
+    }
+
+    .timetable-record-details {
+        grid-template-columns: 1fr 1fr;
+        gap: 13px;
+    }
+
+    .timetable-record-actions button {
+        flex: 1 1 auto;
+    }
+
+    .exam-file-information {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
