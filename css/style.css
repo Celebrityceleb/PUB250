@@ -6637,3 +6637,135 @@ input {
     }
 
 }
+/* =========================================
+   LECTURE ENTRY FORM
+========================================= */
+
+.timetable-form-panel {
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 14px;
+    padding: 24px;
+    margin: 20px 0 28px;
+    box-shadow: 0 5px 20px rgba(16, 30, 53, 0.05);
+}
+
+.timetable-form-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    padding-bottom: 20px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.timetable-form-heading h3 {
+    color: #101e35;
+    font-size: 19px;
+    margin: 0 0 7px;
+}
+
+.timetable-form-heading p {
+    color: #8490a1;
+    font-size: 13px;
+    margin: 0;
+}
+
+.timetable-close-button {
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    border: 1px solid #e5eaf1;
+    border-radius: 8px;
+    background: #f7f9fc;
+    color: #536176;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.timetable-close-button:hover {
+    background: #fff0f0;
+    color: #bd343d;
+}
+
+.timetable-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+}
+
+.timetable-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.timetable-field label {
+    color: #34445c;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.timetable-field input,
+.timetable-field select,
+.timetable-field textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 14px;
+    border: 1px solid #dce3ec;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #26364d;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.timetable-field input:focus,
+.timetable-field select:focus,
+.timetable-field textarea:focus {
+    border-color: #c49a43;
+    box-shadow: 0 0 0 3px rgba(196, 154, 67, 0.12);
+}
+
+.timetable-field textarea {
+    resize: vertical;
+    min-height: 95px;
+    line-height: 1.6;
+}
+
+.timetable-field input::placeholder,
+.timetable-field textarea::placeholder {
+    color: #a3adbb;
+}
+
+.timetable-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 22px;
+    margin-top: 22px;
+    border-top: 1px solid #edf0f4;
+}
+
+@media (max-width: 600px) {
+
+    .timetable-form-panel {
+        padding: 17px;
+    }
+
+    .timetable-form-heading h3 {
+        font-size: 17px;
+    }
+
+    .timetable-form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .timetable-form-actions button {
+        width: 100%;
+    }
+
+}
