@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Management Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f4f6fa;
+        }
+        h2 { color: #101E35; }
+        button {
+            padding: 14px 20px;
+            background: #101E35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        pre {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Admin Management Test</h2>
+    <p>Checks whether the Super Administrator can retrieve registered accounts.</p>
+
+    <button id="testButton">Load All Accounts</button>
+
+    <h3>Result</h3>
+    <pre id="result">Waiting for test...</pre>
+
+    <script type="module">
+        import { supabase } from "./js/config.js";
+
+        const button = document.getElementById("testButton");
+        const result = document.getElementById("result");
+
+        button.addEventListener("click", async () => {
+            result.textContent = "Loading accounts...";
+
+            const { data, error } = await supabase.functions.invoke(
+                "admin-management",
+                {
+                    body: {
+                        action: "list_accounts"
+                    }
+                }
+            );
+
+            if (error) {
+                let details = error.message;
+
+                if (error.context) {
+                    try {
+                        const response = await error.context.json();
+                        details += "\n" + JSON.stringify(response, null, 2);
+                    } catch {}
+                }
+
+                result.textContent = "ERROR:\n" + details;
+                return;
+            }
+
+            result.textContent = JSON.stringify(data, null, 2);
+        });
+    </script>
+
+</body>
+</html>
