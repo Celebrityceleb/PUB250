@@ -34,10 +34,24 @@
                 }
             );
 
-            result.textContent = JSON.stringify({
-                response: data,
-                error: error?.message || null
-            }, null, 2);
+            let details = {
+    response: data,
+    error: error?.message || null,
+    status: error?.context?.status || null
+};
+
+if (error?.context) {
+    try {
+        const response = await error.context.clone().text();
+        details.serverResponse = response
+            ? JSON.parse(response)
+            : "Empty response";
+    } catch {
+        details.serverResponse = "Could not read server response.";
+    }
+}
+
+result.textContent = JSON.stringify(details, null, 2);
 
             button.disabled = false;
         });
