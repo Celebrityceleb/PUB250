@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Test</title>
+</head>
+<body>
+    <h2>Admin Management Security Test</h2>
+    <button id="testButton">Test Student Access</button>
+    <pre id="result">Waiting...</pre>
+
+    <script type="module">
+        import { supabase } from "./js/config.js";
+
+        const button = document.getElementById("testButton");
+        const result = document.getElementById("result");
+
+        button.addEventListener("click", async () => {
+            button.disabled = true;
+            result.textContent = "Testing...";
+
+            const { data, error } = await supabase.functions.invoke(
+                "admin-management",
+                {
+                    body: {
+                        action: "invite",
+                        full_name: "Security Test",
+                        email: "test@example.com",
+                        role: "student",
+                        matric_no: "TEST001",
+                        phone: "08000000000"
+                    }
+                }
+            );
+
+            result.textContent = JSON.stringify({
+                response: data,
+                error: error?.message || null
+            }, null, 2);
+
+            button.disabled = false;
+        });
+    </script>
+</body>
+</html>
