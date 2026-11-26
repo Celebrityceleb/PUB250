@@ -465,3 +465,147 @@ function showAccountDetails(account) {
         if (event.target === modal) modal.remove();
     });
 }
+/* =========================================
+   CREATE ACCOUNT FORM
+========================================= */
+
+function showCreateAccountForm() {
+    const existingModal = document.getElementById("createAccountModal");
+
+    if (existingModal) existingModal.remove();
+
+    const modal = document.createElement("div");
+
+    modal.id = "createAccountModal";
+    modal.className = "account-details-modal";
+
+    modal.innerHTML = `
+        <div class="account-details-panel create-account-panel">
+
+            <div class="account-modal-header">
+                <div>
+                    <h2>Create New Account</h2>
+                    <p>Create a PUB250 student or administrator account.</p>
+                </div>
+
+                <button id="closeCreateAccount" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+
+            <form id="createAccountForm">
+
+                <div class="create-account-field">
+                    <label for="newAccountRole">Account Role</label>
+
+                    <select id="newAccountRole" required>
+                        <option value="student">Student</option>
+                        <option value="course_rep">Course Representative</option>
+                        <option value="assistant_course_rep">
+                            Assistant Course Representative
+                        </option>
+                    </select>
+                </div>
+
+                <div class="create-account-field">
+                    <label for="newAccountName">Full Name</label>
+                    <input
+                        type="text"
+                        id="newAccountName"
+                        placeholder="Enter full name"
+                        required
+                    >
+                </div>
+
+                <div class="create-account-field">
+                    <label for="newAccountEmail">Email Address</label>
+                    <input
+                        type="email"
+                        id="newAccountEmail"
+                        placeholder="Enter email address"
+                        required
+                    >
+                </div>
+
+                <div class="create-account-field">
+                    <label for="newAccountPhone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="newAccountPhone"
+                        placeholder="Enter phone number"
+                        required
+                    >
+                </div>
+
+                <div class="create-account-field" id="matricNumberField">
+                    <label for="newAccountMatric">Matric Number</label>
+                    <input
+                        type="text"
+                        id="newAccountMatric"
+                        placeholder="Enter matric number"
+                    >
+                </div>
+
+                <div class="create-account-notice">
+                    <strong>Account invitation</strong>
+                    <p>
+                        The account holder will receive an invitation
+                        to set their own password.
+                    </p>
+                </div>
+
+                <div class="create-account-actions">
+                    <button type="button" id="cancelCreateAccount">
+                        Cancel
+                    </button>
+
+                    <button type="submit" id="submitCreateAccount">
+                        Create Account
+                    </button>
+                </div>
+
+                <p id="createAccountMessage"></p>
+
+            </form>
+
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    const roleSelect = document.getElementById("newAccountRole");
+    const matricField = document.getElementById("matricNumberField");
+    const matricInput = document.getElementById("newAccountMatric");
+
+    function updateMatricField() {
+        const isStudent = roleSelect.value === "student";
+
+        matricField.style.display = isStudent ? "block" : "none";
+        matricInput.required = isStudent;
+
+        if (!isStudent) {
+            matricInput.value = "";
+        }
+    }
+
+    roleSelect.addEventListener("change", updateMatricField);
+
+    updateMatricField();
+
+    function closeForm() {
+        modal.remove();
+    }
+
+    document.getElementById("closeCreateAccount")
+        .addEventListener("click", closeForm);
+
+    document.getElementById("cancelCreateAccount")
+        .addEventListener("click", closeForm);
+
+    modal.addEventListener("click", event => {
+        if (event.target === modal) closeForm();
+    });
+
+    document.getElementById("createAccountForm")
+        .addEventListener("submit", handleCreateAccount);
+}
