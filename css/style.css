@@ -8146,3 +8146,78 @@ input {
         font-size: 11px;
     }
 }
+/* =========================================
+   PUB250 — ACCOUNT MANAGEMENT ACTIONS
+========================================= */
+
+.account-management-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #e8edf3;
+}
+
+.account-management-actions .account-action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+/* Suspend */
+#suspendAccountButton {
+    background: #fff3e6;
+    color: #b45309;
+    border: 1px solid #f3d1a5;
+}
+
+#suspendAccountButton:hover {
+    background: #b45309;
+    color: #ffffff;
+}
+
+/* Reactivate */
+#reactivateAccountButton {
+    background: #e8f7ed;
+    color: #15803d;
+    border: 1px solid #b7e2c4;
+}
+
+#reactivateAccountButton:hover {
+    background: #15803d;
+    color: #ffffff;
+}
+
+/* Press effect */
+#suspendAccountButton:active,
+#reactivateAccountButton:active {
+    transform: scale(0.97);
+}
+
+/* Disabled */
+.account-management-actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .account-management-actions {
+        gap: 9px;
+    }
+
+    .account-management-actions .account-action-button {
+        flex: 1;
+        min-width: 120px;
+        padding: 11px 12px;
+    }
+}
