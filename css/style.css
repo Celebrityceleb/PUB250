@@ -8069,3 +8069,80 @@ input {
     line-height: 1.5;
     color: #344054;
 }
+/* =========================================
+   ADMIN MANAGEMENT — ACCESS CONTROL BUTTONS
+========================================= */
+
+/* Shared button styling */
+.suspend-account-button,
+.reactivate-account-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Suspend Account */
+.suspend-account-button {
+    background: #fff4e5;
+    color: #b45309;
+    border: 1px solid #f5d5a8;
+}
+
+.suspend-account-button:hover {
+    background: #b45309;
+    color: #ffffff;
+    border-color: #b45309;
+}
+
+/* Reactivate Account */
+.reactivate-account-button {
+    background: #e9f8ef;
+    color: #15803d;
+    border: 1px solid #b8e5c7;
+}
+
+.reactivate-account-button:hover {
+    background: #15803d;
+    color: #ffffff;
+    border-color: #15803d;
+}
+
+/* Active interaction */
+.suspend-account-button:active,
+.reactivate-account-button:active {
+    transform: scale(0.97);
+}
+
+/* Keyboard accessibility */
+.suspend-account-button:focus-visible,
+.reactivate-account-button:focus-visible {
+    outline: 3px solid rgba(16, 30, 53, 0.2);
+    outline-offset: 2px;
+}
+
+/* Disabled state */
+.suspend-account-button:disabled,
+.reactivate-account-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .suspend-account-button,
+    .reactivate-account-button {
+        padding: 8px 11px;
+        font-size: 11px;
+    }
+}
