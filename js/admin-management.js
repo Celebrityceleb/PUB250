@@ -7,19 +7,22 @@ import { supabase } from "./config.js";
 
 let allAccounts = [];
 
+const FUNCTION_NAME = "admin-management-";
+
 export async function loadAdminManagement(container) {
     container.innerHTML = `
         <div class="admin-management">
-            <div class="section-heading">
-    <div>
-        <h2>Admin Management</h2>
-        <p>Manage PUB250 accounts, roles and access.</p>
-    </div>
 
-    <button id="createAccountButton" class="create-account-button">
-        + Create New Account
-    </button>
-</div>
+            <div class="section-heading">
+                <div>
+                    <h2>Admin Management</h2>
+                    <p>Manage PUB250 accounts, roles and access.</p>
+                </div>
+
+                <button id="createAccountButton" class="create-account-button">
+                    + Create New Account
+                </button>
+            </div>
 
             <div class="admin-management-stats" id="accountStats">
                 <div class="management-stat">
@@ -67,12 +70,12 @@ export async function loadAdminManagement(container) {
             <div id="accountList" class="account-list">
                 <p>Loading accounts...</p>
             </div>
+
         </div>
     `;
 
-    await fetchAccounts();
-  document.getElementById("createAccountButton")
-    .addEventListener("click", showCreateAccountForm);
+    document.getElementById("createAccountButton")
+        .addEventListener("click", showCreateAccountForm);
 
     document.getElementById("accountSearch")
         .addEventListener("input", renderAccounts);
@@ -82,30 +85,54 @@ export async function loadAdminManagement(container) {
 
     document.getElementById("accountStatusFilter")
         .addEventListener("change", renderAccounts);
+
+    await fetchAccounts();
 }
 
 /* =========================================
-   FETCH ACCOUNTS FROM SUPABASE
+   SUPABASE ACTION HELPER
+========================================= */
+
+async function callManagementAction(payload) {
+    const { data, error } = await supabase.functions.invoke(
+        FUNCTION_NAME,
+        {
+            body: payload
+        }
+    );
+
+    if (error) {
+        throw new Error(
+            data?.error ||
+            error.message ||
+            "The account operation failed."
+        );
+    }
+
+    if (!data || !data.success) {
+        throw new Error(
+            data?.error || "The account operation was unsuccessful."
+        );
+    }
+
+    return data;
+}
+
+/* =========================================
+   FETCH ACCOUNTS
 ========================================= */
 
 async function fetchAccounts() {
     const accountList = document.getElementById("accountList");
 
+    if (!accountList) return;
+
+    accountList.innerHTML = "<p>Loading accounts...</p>";
+
     try {
-        const { data, error } = await supabase.functions.invoke(
-            "admin-management-",
-            {
-                body: {
-                    action: "list_accounts"
-                }
-            }
-        );
-
-        if (error) throw error;
-
-        if (!data || !data.success) {
-            throw new Error(data?.error || "Unable to load accounts.");
-        }
+        const data = await callManagementAction({
+            action: "list_accounts"
+        });
 
         allAccounts = data.accounts || [];
 
@@ -118,7 +145,7 @@ async function fetchAccounts() {
         accountList.innerHTML = `
             <div class="management-message error">
                 <h3>Unable to load accounts</h3>
-                <p>${escapeHTML(error.message || "An unexpected error occurred.")}</p>
+                <p>${escapeHTML(error.message)}</p>
                 <button id="retryAccounts">Try Again</button>
             </div>
         `;
@@ -189,7 +216,7 @@ function escapeHTML(value) {
 }
 
 /* =========================================
-   ACCOUNT LIST & FILTERING
+   ACCOUNT LIST AND FILTERING
 ========================================= */
 
 function renderAccounts() {
@@ -234,76 +261,66 @@ function renderAccounts() {
         return;
     }
 
-    accountList.innerHTML = filteredAccounts.map(account => {
-        const roleName = getRoleName(account.role);
-        const statusName = getStatusName(account.approval_status);
+    accountList.innerHTML = filteredAccounts.map(account => `
+        <div class="account-card">
 
-        const invitationName = getInvitationName(
-            account.invitation_status
-        );
+            <div class="account-card-main">
 
-        const initials = getInitials(account.full_name);
-
-        return `
-            <div class="account-card">
-
-                <div class="account-card-main">
-
-                    <div class="account-avatar">
-                        ${escapeHTML(initials)}
-                    </div>
-
-                    <div class="account-identity">
-                        <h3>${escapeHTML(account.full_name || "Unnamed Account")}</h3>
-
-                        <p>${escapeHTML(account.email || "No email registered")}</p>
-
-                        <span class="account-role">
-                            ${escapeHTML(roleName)}
-                        </span>
-                    </div>
-
+                <div class="account-avatar">
+                    ${escapeHTML(getInitials(account.full_name))}
                 </div>
 
-                <div class="account-details">
+                <div class="account-identity">
+                    <h3>${escapeHTML(account.full_name || "Unnamed Account")}</h3>
 
-                    <div>
-                        <span>Matric Number</span>
-                        <strong>${escapeHTML(account.matric_no || "Not assigned")}</strong>
-                    </div>
+                    <p>${escapeHTML(account.email || "No email registered")}</p>
 
-                    <div>
-                        <span>Phone Number</span>
-                        <strong>${escapeHTML(account.phone || "Not provided")}</strong>
-                    </div>
-
-                    <div>
-                        <span>Account Status</span>
-                        <strong class="status-${escapeHTML(account.approval_status)}">
-                            ${escapeHTML(statusName)}
-                        </strong>
-                    </div>
-
-                    <div>
-                        <span>Invitation</span>
-                        <strong>${escapeHTML(invitationName)}</strong>
-                    </div>
-
-                </div>
-
-                <div class="account-card-footer">
-                    <span>Registered: ${formatDate(account.created_at)}</span>
-                    <button
-                        class="account-details-button"
-                        data-account-id="${escapeHTML(account.id)}"
-                    >
-                        View Details
-                    </button>
+                    <span class="account-role">
+                        ${escapeHTML(getRoleName(account.role))}
+                    </span>
                 </div>
 
             </div>
-        `;
-    }).join("");
+
+            <div class="account-details">
+
+                <div>
+                    <span>Matric Number</span>
+                    <strong>${escapeHTML(account.matric_no || "Not assigned")}</strong>
+                </div>
+
+                <div>
+                    <span>Phone Number</span>
+                    <strong>${escapeHTML(account.phone || "Not provided")}</strong>
+                </div>
+
+                <div>
+                    <span>Account Status</span>
+                    <strong class="status-${escapeHTML(account.approval_status)}">
+                        ${escapeHTML(getStatusName(account.approval_status))}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Invitation</span>
+                    <strong>${escapeHTML(getInvitationName(account.invitation_status))}</strong>
+                </div>
+
+            </div>
+
+            <div class="account-card-footer">
+                <span>Registered: ${escapeHTML(formatDate(account.created_at))}</span>
+
+                <button
+                    class="account-details-button"
+                    data-account-id="${escapeHTML(account.id)}"
+                >
+                    View Details
+                </button>
+            </div>
+
+        </div>
+    `).join("");
 
     document.querySelectorAll(".account-details-button")
         .forEach(button => {
@@ -377,18 +394,74 @@ function formatDate(date) {
 }
 
 /* =========================================
-   ACCOUNT DETAILS
+   ACCOUNT DETAILS AND ACTIONS
 ========================================= */
 
 function showAccountDetails(account) {
-    const existingModal = document.getElementById("accountDetailsModal");
+    document.getElementById("accountDetailsModal")?.remove();
 
-    if (existingModal) existingModal.remove();
+    const isSuperAdmin = account.role === "super_admin";
 
     const modal = document.createElement("div");
 
     modal.id = "accountDetailsModal";
     modal.className = "account-details-modal";
+
+    let actionButtons = "";
+
+    if (!isSuperAdmin) {
+        actionButtons = `
+            <div class="account-management-actions">
+
+                <button
+                    type="button"
+                    id="editAccountButton"
+                    class="account-action-button"
+                >
+                    Edit Account
+                </button>
+
+                ${
+                    account.approval_status === "suspended"
+                    ? `
+                        <button
+                            type="button"
+                            id="reactivateAccountButton"
+                            class="account-action-button"
+                        >
+                            Reactivate Account
+                        </button>
+                    `
+                    : account.approval_status === "approved"
+                    ? `
+                        <button
+                            type="button"
+                            id="suspendAccountButton"
+                            class="account-action-button"
+                        >
+                            Suspend Account
+                        </button>
+                    `
+                    : ""
+                }
+
+                <button
+                    type="button"
+                    id="revokeAccountButton"
+                    class="account-action-button danger"
+                >
+                    Revoke Access
+                </button>
+
+            </div>
+        `;
+    } else {
+        actionButtons = `
+            <div class="management-message">
+                <p>The Super Administrator account is protected from account-management actions.</p>
+            </div>
+        `;
+    }
 
     modal.innerHTML = `
         <div class="account-details-panel">
@@ -451,6 +524,10 @@ function showAccountDetails(account) {
                     <strong>${escapeHTML(formatDate(account.updated_at))}</strong>
                 </div>
 
+                ${actionButtons}
+
+                <p id="accountActionMessage"></p>
+
             </div>
 
         </div>
@@ -464,15 +541,299 @@ function showAccountDetails(account) {
     modal.addEventListener("click", event => {
         if (event.target === modal) modal.remove();
     });
+
+    document.getElementById("editAccountButton")
+        ?.addEventListener("click", () => showEditAccountForm(account));
+
+    document.getElementById("suspendAccountButton")
+        ?.addEventListener("click", () => suspendAccount(account));
+
+    document.getElementById("reactivateAccountButton")
+        ?.addEventListener("click", () => reactivateAccount(account));
+
+    document.getElementById("revokeAccountButton")
+        ?.addEventListener("click", () => revokeAccount(account));
+       }
+/* =========================================
+   EDIT ACCOUNT FORM
+========================================= */
+
+function showEditAccountForm(account) {
+    document.getElementById("accountDetailsModal")?.remove();
+    document.getElementById("editAccountModal")?.remove();
+
+    const isStudent = account.role === "student";
+
+    const modal = document.createElement("div");
+
+    modal.id = "editAccountModal";
+    modal.className = "account-details-modal";
+
+    modal.innerHTML = `
+        <div class="account-details-panel create-account-panel">
+
+            <div class="account-modal-header">
+                <div>
+                    <h2>Edit Account</h2>
+                    <p>Update account information.</p>
+                </div>
+
+                <button id="closeEditAccount" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+
+            <form id="editAccountForm">
+
+                <div class="create-account-field">
+                    <label for="editAccountName">Full Name</label>
+                    <input
+                        type="text"
+                        id="editAccountName"
+                        value="${escapeHTML(account.full_name)}"
+                        required
+                    >
+                </div>
+
+                <div class="create-account-field">
+                    <label for="editAccountEmail">Email Address</label>
+                    <input
+                        type="email"
+                        id="editAccountEmail"
+                        value="${escapeHTML(account.email)}"
+                        required
+                    >
+                </div>
+
+                <div class="create-account-field">
+                    <label for="editAccountPhone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="editAccountPhone"
+                        value="${escapeHTML(account.phone)}"
+                        required
+                    >
+                </div>
+
+                ${
+                    isStudent
+                    ? `
+                        <div class="create-account-field">
+                            <label for="editAccountMatric">Matric Number</label>
+                            <input
+                                type="text"
+                                id="editAccountMatric"
+                                value="${escapeHTML(account.matric_no)}"
+                                required
+                            >
+                        </div>
+                    `
+                    : ""
+                }
+
+                <div class="management-message">
+                    <p>Account role cannot be changed from this form.</p>
+                </div>
+
+                <div class="create-account-actions">
+
+                    <button type="button" id="cancelEditAccount">
+                        Cancel
+                    </button>
+
+                    <button type="submit" id="saveAccountChanges">
+                        Save Changes
+                    </button>
+
+                </div>
+
+                <p id="editAccountMessage"></p>
+
+            </form>
+
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    function closeForm() {
+        modal.remove();
+        showAccountDetails(account);
+    }
+
+    document.getElementById("closeEditAccount")
+        .addEventListener("click", closeForm);
+
+    document.getElementById("cancelEditAccount")
+        .addEventListener("click", closeForm);
+
+    modal.addEventListener("click", event => {
+        if (event.target === modal) closeForm();
+    });
+
+    document.getElementById("editAccountForm")
+        .addEventListener("submit", event => saveAccountChanges(event, account));
 }
+
+/* =========================================
+   SAVE ACCOUNT CHANGES
+========================================= */
+
+async function saveAccountChanges(event, account) {
+    event.preventDefault();
+
+    const button = document.getElementById("saveAccountChanges");
+    const message = document.getElementById("editAccountMessage");
+
+    const fullName = document.getElementById("editAccountName")
+        .value.trim();
+
+    const email = document.getElementById("editAccountEmail")
+        .value.trim().toLowerCase();
+
+    const phone = document.getElementById("editAccountPhone")
+        .value.trim();
+
+    const matricNo = account.role === "student"
+        ? document.getElementById("editAccountMatric").value.trim()
+        : null;
+
+    if (!fullName || !email || !phone) {
+        message.textContent = "Complete all required fields.";
+        return;
+    }
+
+    if (account.role === "student" && !matricNo) {
+        message.textContent = "Matric number is required.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Saving...";
+
+    try {
+        await callManagementAction({
+            action: "edit_account",
+            user_id: account.id,
+            target_id: account.id,
+            id: account.id,
+            full_name: fullName,
+            email,
+            phone,
+            matric_no: matricNo
+        });
+
+        alert("Account information updated successfully.");
+
+        document.getElementById("editAccountModal")?.remove();
+
+        await fetchAccounts();
+
+    } catch (error) {
+        console.error("Edit account error:", error);
+
+        message.textContent = error.message;
+
+        button.disabled = false;
+        button.textContent = "Save Changes";
+    }
+}
+
+/* =========================================
+   SUSPEND ACCOUNT
+========================================= */
+
+async function suspendAccount(account) {
+    const confirmed = confirm(
+        `Suspend ${account.full_name}?\n\nThis will block the account from accessing PUB250. Their records will not be deleted.`
+    );
+
+    if (!confirmed) return;
+
+    await performAccountAction(
+        account,
+        "suspend_account",
+        "Account suspended successfully."
+    );
+}
+
+/* =========================================
+   REACTIVATE ACCOUNT
+========================================= */
+
+async function reactivateAccount(account) {
+    const confirmed = confirm(
+        `Reactivate ${account.full_name}?\n\nThis will restore the account's access if it has not been permanently revoked.`
+    );
+
+    if (!confirmed) return;
+
+    await performAccountAction(
+        account,
+        "reactivate_account",
+        "Account reactivation successful."
+    );
+}
+
+/* =========================================
+   REVOKE ACCOUNT ACCESS
+========================================= */
+
+async function revokeAccount(account) {
+    const confirmed = confirm(
+        `PERMANENT ACCESS REVOCATION\n\nYou are about to revoke access for:\n${account.full_name}\n\nThis is different from ordinary suspension. The account and academic records will be retained, but access will be blocked.\n\nContinue?`
+    );
+
+    if (!confirmed) return;
+
+    const secondConfirmation = confirm(
+        "Are you absolutely sure? This action is intended to be irreversible through ordinary account reactivation."
+    );
+
+    if (!secondConfirmation) return;
+
+    await performAccountAction(
+        account,
+        "revoke_access",
+        "Account access has been revoked."
+    );
+}
+
+/* =========================================
+   PERFORM ACCOUNT ACTION
+========================================= */
+
+async function performAccountAction(account, action, successMessage) {
+    try {
+        await callManagementAction({
+            action,
+            user_id: account.id,
+            target_id: account.id,
+            id: account.id
+        });
+
+        alert(successMessage);
+
+        document.getElementById("accountDetailsModal")?.remove();
+
+        await fetchAccounts();
+
+    } catch (error) {
+        console.error("Account management action error:", error);
+
+        alert(
+            "The operation could not be completed.\n\n" +
+            error.message
+        );
+    }
+}
+
 /* =========================================
    CREATE ACCOUNT FORM
 ========================================= */
 
 function showCreateAccountForm() {
-    const existingModal = document.getElementById("createAccountModal");
-
-    if (existingModal) existingModal.remove();
+    document.getElementById("createAccountModal")?.remove();
 
     const modal = document.createElement("div");
 
@@ -555,6 +916,7 @@ function showCreateAccountForm() {
                 </div>
 
                 <div class="create-account-actions">
+
                     <button type="button" id="cancelCreateAccount">
                         Cancel
                     </button>
@@ -562,6 +924,7 @@ function showCreateAccountForm() {
                     <button type="submit" id="submitCreateAccount">
                         Create Account
                     </button>
+
                 </div>
 
                 <p id="createAccountMessage"></p>
@@ -583,13 +946,10 @@ function showCreateAccountForm() {
         matricField.style.display = isStudent ? "block" : "none";
         matricInput.required = isStudent;
 
-        if (!isStudent) {
-            matricInput.value = "";
-        }
+        if (!isStudent) matricInput.value = "";
     }
 
     roleSelect.addEventListener("change", updateMatricField);
-
     updateMatricField();
 
     function closeForm() {
@@ -609,6 +969,7 @@ function showCreateAccountForm() {
     document.getElementById("createAccountForm")
         .addEventListener("submit", handleCreateAccount);
 }
+
 /* =========================================
    CREATE ACCOUNT — SUPABASE ACTION
 ========================================= */
@@ -616,7 +977,6 @@ function showCreateAccountForm() {
 async function handleCreateAccount(event) {
     event.preventDefault();
 
-    const form = document.getElementById("createAccountForm");
     const submitButton = document.getElementById("submitCreateAccount");
     const message = document.getElementById("createAccountMessage");
 
@@ -634,7 +994,7 @@ async function handleCreateAccount(event) {
     const matricNo = document.getElementById("newAccountMatric")
         .value.trim();
 
-    if (!fullName || !email || !role) {
+    if (!fullName || !email || !role || !phone) {
         message.textContent = "Please complete all required fields.";
         return;
     }
@@ -650,29 +1010,14 @@ async function handleCreateAccount(event) {
     message.textContent = "Processing account invitation...";
 
     try {
-        const { data, error } = await supabase.functions.invoke(
-            "admin-management-",
-            {
-                body: {
-                    action: "invite",
-                    full_name: fullName,
-                    email: email,
-                    role: role,
-                    phone: phone || null,
-                    matric_no: role === "student" ? matricNo : null
-                }
-            }
-        );
-
-        if (error) {
-            throw new Error(
-                data?.error || error.message || "Account creation failed."
-            );
-        }
-
-        if (!data || !data.success) {
-            throw new Error(data?.error || "Unable to create account.");
-        }
+        await callManagementAction({
+            action: "invite",
+            full_name: fullName,
+            email,
+            role,
+            phone,
+            matric_no: role === "student" ? matricNo : null
+        });
 
         message.textContent =
             "Account created successfully. Invitation status: Pending.";
@@ -688,10 +1033,9 @@ async function handleCreateAccount(event) {
     } catch (error) {
         console.error("Account creation error:", error);
 
-        message.textContent =
-            error.message || "An unexpected error occurred.";
+        message.textContent = error.message;
 
         submitButton.disabled = false;
         submitButton.textContent = "Create Account";
     }
-       }
+}
