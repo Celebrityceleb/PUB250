@@ -609,3 +609,89 @@ function showCreateAccountForm() {
     document.getElementById("createAccountForm")
         .addEventListener("submit", handleCreateAccount);
 }
+/* =========================================
+   CREATE ACCOUNT — SUPABASE ACTION
+========================================= */
+
+async function handleCreateAccount(event) {
+    event.preventDefault();
+
+    const form = document.getElementById("createAccountForm");
+    const submitButton = document.getElementById("submitCreateAccount");
+    const message = document.getElementById("createAccountMessage");
+
+    const fullName = document.getElementById("newAccountName")
+        .value.trim();
+
+    const email = document.getElementById("newAccountEmail")
+        .value.trim().toLowerCase();
+
+    const phone = document.getElementById("newAccountPhone")
+        .value.trim();
+
+    const role = document.getElementById("newAccountRole").value;
+
+    const matricNo = document.getElementById("newAccountMatric")
+        .value.trim();
+
+    if (!fullName || !email || !role) {
+        message.textContent = "Please complete all required fields.";
+        return;
+    }
+
+    if (role === "student" && !matricNo) {
+        message.textContent = "Student matric number is required.";
+        return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Creating Account...";
+
+    message.textContent = "Processing account invitation...";
+
+    try {
+        const { data, error } = await supabase.functions.invoke(
+            "admin-management-",
+            {
+                body: {
+                    action: "invite",
+                    full_name: fullName,
+                    email: email,
+                    role: role,
+                    phone: phone || null,
+                    matric_no: role === "student" ? matricNo : null
+                }
+            }
+        );
+
+        if (error) {
+            throw new Error(
+                data?.error || error.message || "Account creation failed."
+            );
+        }
+
+        if (!data || !data.success) {
+            throw new Error(data?.error || "Unable to create account.");
+        }
+
+        message.textContent =
+            "Account created successfully. Invitation status: Pending.";
+
+        submitButton.textContent = "Created Successfully";
+
+        await fetchAccounts();
+
+        setTimeout(() => {
+            document.getElementById("createAccountModal")?.remove();
+        }, 1800);
+
+    } catch (error) {
+        console.error("Account creation error:", error);
+
+        message.textContent =
+            error.message || "An unexpected error occurred.";
+
+        submitButton.disabled = false;
+        submitButton.textContent = "Create Account";
+    }
+       }
